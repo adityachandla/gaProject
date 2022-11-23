@@ -20,6 +20,7 @@ public class Reader {
         .filter(path -> !path.toFile().isDirectory())
         .map(path -> path.toAbsolutePath().toString())
         .map(Reader::toProblemInstance)
+        .limit(1)
         .toList();
   }
 
