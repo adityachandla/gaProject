@@ -35,11 +35,9 @@ public class PolygonCreationUtil {
       curr.setNext(newSegment);
       newSegment.setPrev(curr);
       curr = newSegment;
-
-      //We also maintain a reference from a point to a segments that it is a part of
-      boundary.get(i-1).getSegments().add(newSegment);
-      boundary.get(i).getSegments().add(newSegment);
     }
+    curr.setNext(startSegment);
+    startSegment.setPrev(curr);
     return startSegment;
   }
 }

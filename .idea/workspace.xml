@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Polygon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/TriangulationUtil.java" afterDir="false" />
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Added skeleton code.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/Converter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/PolygonCreationUtilTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +23,7 @@
       <list>
         <option value="Record" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -43,13 +42,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "settings.editor.selected.configurable": "editor.preferences.gutterIcons"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.ga.data" />
@@ -59,8 +61,28 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.ga.util" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.PolygonCreationUtilTest.createPolygonTest">
+    <configuration name="Converter" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ga.Converter" />
+      <module name="gaProject" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/geogebra.xml $PROJECT_DIR$/customInstances/trial1.json" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ga.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
@@ -75,8 +97,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PolygonCreationUtilTest.createPolygonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gaProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ga.util" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.PolygonCreationUtilTest" />
+      <option name="METHOD_NAME" value="createPolygonTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Converter" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.PolygonCreationUtilTest.createPolygonTest" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PolygonCreationUtilTest.createPolygonTest" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -90,6 +134,14 @@
       <option name="presentableId" value="Default" />
       <updated>1669062926949</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added skeleton code.">
+      <created>1669222527004</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669222527004</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -102,5 +154,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added skeleton code." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added skeleton code." />
   </component>
 </project>
