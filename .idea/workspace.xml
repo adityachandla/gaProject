@@ -4,34 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Added converter and added a simple test for polygon creation.">
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/ccheese142.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/ccheese4390.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/example_instance1.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/fpg-poly_0000000020_h1.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/fpg-poly_0000000020_h2.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/fpg-poly_0000004900_h2.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/maze_4344_250_001_01.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/maze_79_50_05_005.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/socg60.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_iso_aligned_mc0000088.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_iso_aligned_mc0001336.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_iso_mc0000080.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_octa_mc0000082.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_octa_mc0000784.instance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_smo_mc0005962.instance.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Bugfixes and added course instances.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryUtilTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runner.sh" beforeDir="false" afterPath="$PROJECT_DIR$/runner.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Polygon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/TriangulationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/ConvexConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/PolygonCreationUtilTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/PolygonCreationUtilTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/ConvexConverter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +98,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GeometryUtilTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gaProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ga.util" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryUtilTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeometryUtilTest.testCollinear" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gaProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ga.util" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryUtilTest" />
+      <option name="METHOD_NAME" value="testCollinear" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PolygonCreationUtilTest.createPolygonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gaProject" />
       <extension name="coverage">
@@ -138,11 +148,15 @@
     <list>
       <item itemvalue="Application.Converter" />
       <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.GeometryUtilTest" />
+      <item itemvalue="JUnit.GeometryUtilTest.testCollinear" />
       <item itemvalue="JUnit.PolygonCreationUtilTest.createPolygonTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.GeometryUtilTest" />
+        <item itemvalue="JUnit.GeometryUtilTest.testCollinear" />
         <item itemvalue="JUnit.PolygonCreationUtilTest.createPolygonTest" />
       </list>
     </recent_temporary>
@@ -170,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671394549647</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Bugfixes and added course instances.">
+      <created>1671470058641</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1671470058641</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,6 +208,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added skeleton code." />
     <MESSAGE value="Added converter and added a simple test for polygon creation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added converter and added a simple test for polygon creation." />
+    <MESSAGE value="Bugfixes and added course instances." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bugfixes and added course instances." />
   </component>
 </project>

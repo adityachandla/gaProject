@@ -1,12 +1,16 @@
 package com.ga.data;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 @Data
+@EqualsAndHashCode
 public class LineSegment {
   private Point start, end;
+  @EqualsAndHashCode.Exclude
   private LineSegment next;
+  @EqualsAndHashCode.Exclude
   private LineSegment prev;
 
   public LineSegment(Point start, Point end) {
