@@ -2,7 +2,7 @@ package com.ga;
 
 import com.ga.io.Reader;
 import com.ga.util.PolygonCreationUtil;
-import com.ga.util.TriangulationUtil;
+import com.ga.util.ConvexConverter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.file.Path;
@@ -17,7 +17,6 @@ public class Main {
       System.exit(1);
     }
     log.info("Got arguments: {}", Arrays.toString(args));
-    //TODO read one by one so that gc can kick in cause there's a shitload of points
     var problemInstances = Reader.getProblemInstances(Path.of(args[0]));
     log.info("Total instances {}", problemInstances.size());
     for (var problemInstance: problemInstances) {
@@ -26,7 +25,7 @@ public class Main {
           problemInstance.holes().size());
       var polygon = PolygonCreationUtil.createPolygon(problemInstance);
       log.info("Created polygon with total points {}", polygon.getPoints().size());
-      TriangulationUtil.triangulatePolygon(polygon);
+//      ConvexConverter.convertToConvexPolygons(polygon); In progress
     }
   }
 

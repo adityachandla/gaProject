@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public class PolygonCreationUtil {
 
-  //TODO write tests
   public static Polygon createPolygon(ProblemInstance problemInstance) {
     var outerBoundary = problemInstance.outerBoundary();
     //Doubly connected edge list for polygon and holes
@@ -18,6 +17,7 @@ public class PolygonCreationUtil {
     var holes = problemInstance.holes().stream()
         .map(PolygonCreationUtil::createBoundary)
         .toList();
+
     //List of all points
     var polygonPoints = problemInstance.holes().stream()
         .flatMap(List::stream)
@@ -29,15 +29,23 @@ public class PolygonCreationUtil {
   private static LineSegment createBoundary(List<Point> boundary) {
     assert boundary.size() > 2;
     var startSegment = new LineSegment(boundary.get(0), boundary.get(1));
+    startSegment.addReferenceToPoints();
     var curr = startSegment;
     for (int i = 2; i < boundary.size(); i++) {
       var newSegment = new LineSegment(boundary.get(i-1), boundary.get(i));
-      curr.setNext(newSegment);
-      newSegment.setPrev(curr);
+      newSegment.addReferenceToPoints();
+      linkSegments(curr, newSegment);
       curr = newSegment;
     }
-    curr.setNext(startSegment);
-    startSegment.setPrev(curr);
+    var connectorSegment = new LineSegment(boundary.get(boundary.size()-1), boundary.get(0));
+    connectorSegment.addReferenceToPoints();
+    linkSegments(curr, connectorSegment);
+    linkSegments(connectorSegment, startSegment);
     return startSegment;
+  }
+
+  private static void linkSegments(LineSegment from, LineSegment to) {
+    from.setNext(to);
+    to.setPrev(from);
   }
 }

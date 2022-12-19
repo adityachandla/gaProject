@@ -20,8 +20,20 @@ public class Reader {
         .filter(path -> !path.toFile().isDirectory())
         .map(path -> path.toAbsolutePath().toString())
         .map(Reader::toProblemInstance)
-        .limit(1)
+        .map(Reader::setHoles)
         .toList();
+  }
+
+  /**
+   * This method is used to set the boolean flag of holes to true
+   * @param instance Problem Instance
+   * @return returns the same instance with correct values of holes
+   */
+  private static ProblemInstance setHoles(ProblemInstance instance) {
+    instance.holes().stream()
+        .flatMap(List::stream)
+        .forEach(p -> p.setHole(true));
+    return instance;
   }
 
   private static ProblemInstance toProblemInstance(String filePath) {

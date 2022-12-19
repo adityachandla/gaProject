@@ -4,14 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Added skeleton code.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/Converter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/PolygonCreationUtilTest.java" afterDir="false" />
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Added converter and added a simple test for polygon creation.">
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/ccheese142.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/ccheese4390.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/example_instance1.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/fpg-poly_0000000020_h1.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/fpg-poly_0000000020_h2.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/fpg-poly_0000004900_h2.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/maze_4344_250_001_01.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/maze_79_50_05_005.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/socg60.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_iso_aligned_mc0000088.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_iso_aligned_mc0001336.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_iso_mc0000080.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_octa_mc0000082.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_octa_mc0000784.instance.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/instances-2IMA15/srpg_smo_mc0005962.instance.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runner.sh" beforeDir="false" afterPath="$PROJECT_DIR$/runner.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Polygon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/TriangulationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/ConvexConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/PolygonCreationUtilTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/PolygonCreationUtilTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,21 +62,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "settings.editor.selected.configurable": "editor.preferences.gutterIcons"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.gutterIcons&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.ga.data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/instances-2IMA15" />
+      <recent name="$PROJECT_DIR$/customInstances" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/" />
@@ -68,7 +90,7 @@
       <recent name="com.ga.util" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PolygonCreationUtilTest.createPolygonTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Converter" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Converter" />
       <module name="gaProject" />
@@ -86,7 +108,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances/" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15/" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ga.*" />
@@ -120,8 +142,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PolygonCreationUtilTest.createPolygonTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.PolygonCreationUtilTest.createPolygonTest" />
       </list>
     </recent_temporary>
   </component>
@@ -141,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669222527004</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added converter and added a simple test for polygon creation.">
+      <created>1671394549647</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671394549647</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,6 +186,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added skeleton code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added skeleton code." />
+    <MESSAGE value="Added converter and added a simple test for polygon creation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added converter and added a simple test for polygon creation." />
   </component>
 </project>

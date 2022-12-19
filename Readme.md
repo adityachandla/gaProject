@@ -3,9 +3,8 @@
 ## Instructions for running 
 For macOS or linux:
 1. Make sure you have Java 17 and maven installed
-2. Download zip file for problem instances from https://cgshop.ibr.cs.tu-bs.de/competition/cg-shop-2023/#problem-description
-3. Extract the folder named 'instances' from the zip file.
-4. If you have extracted the folder in the project directory you can simply run the project using
-```./runner.sh```, otherwise change the directory in runner.sh.
+2. You should be able to run the project by running
+```./runner.sh```, if you are using intelliJ, then you need to run main
+with the path to the instances-2IMA15 folder that is part of the project.
 
 [Instructions for Windows](https://media.giphy.com/media/1LnQKc4eh8BP2/giphy.gif)

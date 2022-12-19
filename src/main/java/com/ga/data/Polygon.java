@@ -5,10 +5,13 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * points: List of all points of the holes and polygon
+ */
 @Data
 @AllArgsConstructor
 public class Polygon {
   private List<Point> points;
   private LineSegment startingSegment;
-  private List<LineSegment> holes; //Contains the starting line segment of the hole
+  private List<LineSegment> holes;
 }

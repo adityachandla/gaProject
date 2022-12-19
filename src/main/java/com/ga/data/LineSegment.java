@@ -8,10 +8,19 @@ public class LineSegment {
   private Point start, end;
   private LineSegment next;
   private LineSegment prev;
-  private LineSegment triangulationSegment; //The segment that may be added during triangulation.
 
   public LineSegment(Point start, Point end) {
     this.start = start;
     this.end = end;
+  }
+
+  public void addReferenceToPoints() {
+    start.getSegments().add(this);
+    end.getSegments().add(this);
+  }
+
+  public void deleteReferenceFromPoints() {
+    start.getSegments().remove(this);
+    end.getSegments().remove(this);
   }
 }
