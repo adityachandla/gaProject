@@ -28,7 +28,8 @@ public class ConvexConverter {
     var helper = new HashMap<LineSegment, Point>();
 
     for (var point : polygon.getPoints()) {
-      //TODO check how to identify points and add handlers
+      var pointType = GeometryUtil.getPointType(point);
+      log.info("Got point {} hole:{} type: {}", point, point.isHole(), pointType);
     }
   }
 }

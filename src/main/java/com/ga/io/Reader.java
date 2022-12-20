@@ -16,6 +16,9 @@ public class Reader {
 
   @SneakyThrows
   public static List<ProblemInstance> getProblemInstances(Path instancesPath) {
+    if (instancesPath.toFile().isFile()) {
+      return List.of(toProblemInstance(instancesPath.toAbsolutePath().toString()));
+    }
     return Files.walk(instancesPath)
         .filter(path -> !path.toFile().isDirectory())
         .map(path -> path.toAbsolutePath().toString())

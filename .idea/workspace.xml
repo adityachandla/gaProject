@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Bugfixes and added course instances.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryUtilTest.java" afterDir="false" />
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Added orientation test and began writing plane sweep for Y monotone.">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/ConvexConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +22,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Record" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -73,7 +74,7 @@
     <configuration name="Converter" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Converter" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/geogebra.xml $PROJECT_DIR$/customInstances/trial1.json" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/geogebra.xml $PROJECT_DIR$/customInstances/mergeSplit.json" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ga.*" />
@@ -87,13 +88,29 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15/" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/customInstances/" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ga.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeometryTrial.testAngle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gaProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ga.util" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryTrial" />
+      <option name="METHOD_NAME" value="testAngle" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -148,6 +165,7 @@
     <list>
       <item itemvalue="Application.Converter" />
       <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.GeometryTrial.testAngle" />
       <item itemvalue="JUnit.GeometryUtilTest" />
       <item itemvalue="JUnit.GeometryUtilTest.testCollinear" />
       <item itemvalue="JUnit.PolygonCreationUtilTest.createPolygonTest" />
@@ -155,6 +173,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.GeometryTrial.testAngle" />
         <item itemvalue="JUnit.GeometryUtilTest" />
         <item itemvalue="JUnit.GeometryUtilTest.testCollinear" />
         <item itemvalue="JUnit.PolygonCreationUtilTest.createPolygonTest" />
@@ -191,7 +210,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671470058641</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added orientation test and began writing plane sweep for Y monotone.">
+      <created>1671481197840</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671481197840</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,6 +235,7 @@
     <MESSAGE value="Added skeleton code." />
     <MESSAGE value="Added converter and added a simple test for polygon creation." />
     <MESSAGE value="Bugfixes and added course instances." />
-    <option name="LAST_COMMIT_MESSAGE" value="Bugfixes and added course instances." />
+    <MESSAGE value="Added orientation test and began writing plane sweep for Y monotone." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added orientation test and began writing plane sweep for Y monotone." />
   </component>
 </project>

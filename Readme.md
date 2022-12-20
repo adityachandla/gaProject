@@ -8,3 +8,6 @@ For macOS or linux:
 with the path to the instances-2IMA15 folder that is part of the project.
 
 [Instructions for Windows](https://media.giphy.com/media/1LnQKc4eh8BP2/giphy.gif)
+
+Geogebra links for custom test instances:
+1. [mergeSplit.json](https://www.geogebra.org/geometry/gsybcxph) 
