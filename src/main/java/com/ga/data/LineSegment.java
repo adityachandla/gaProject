@@ -2,6 +2,7 @@ package com.ga.data;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 
 @Data
@@ -9,8 +10,10 @@ import lombok.EqualsAndHashCode;
 public class LineSegment {
   private Point start, end;
   @EqualsAndHashCode.Exclude
+  @ToString.Exclude
   private LineSegment next;
   @EqualsAndHashCode.Exclude
+  @ToString.Exclude
   private LineSegment prev;
 
   public LineSegment(Point start, Point end) {

@@ -6,8 +6,6 @@ import org.apache.commons.geometry.euclidean.twod.Lines;
 import org.apache.commons.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.numbers.core.Precision;
 
-import java.util.List;
-
 public class GeometryUtil {
   public enum OrientationResult {
     RIGHT, LEFT, COLLINEAR
@@ -41,21 +39,9 @@ public class GeometryUtil {
   }
 
   public static PointType getPointType(Point p) {
-    List<LineSegment> segments = p.getSegments();
-    //We don't know which one is prev or next
-    var prev = segments.get(0);
-    var next = segments.get(1);
-    if (prev.getNext() != next) {
-      var temp = next;
-      next = prev;
-      prev = temp;
-    }
-    return getPointType(prev, next);
-  }
-
-  private static PointType getPointType(LineSegment prev, LineSegment next) {
-    assert prev.getNext() == next;
-    assert prev.getEnd() == next.getStart();
+    var prevNext = getPrevNext(p);
+    var prev = prevNext.prev();
+    var next = prevNext.next();
     var directionChange = getDirectionChangeY(prev, next);
     if (directionChange == DirectionChange.NONE) {
       return PointType.REGULAR;
@@ -89,5 +75,20 @@ public class GeometryUtil {
 
   private static Vector2D toVector2D(Point p) {
     return Vector2D.of(p.getX(), p.getY());
+  }
+
+  public static PrevNext getPrevNext(Point point) {
+    var prev = point.getSegments().get(0);
+    var next = point.getSegments().get(1);
+    if (prev.getNext() != next) {
+      var temp = next;
+      next = prev;
+      prev = temp;
+    }
+    assert prev.getNext() == next;
+    return new PrevNext(prev, next);
+  }
+
+  public record PrevNext(LineSegment prev, LineSegment next) {
   }
 }
