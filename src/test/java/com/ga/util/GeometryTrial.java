@@ -15,7 +15,7 @@ public class GeometryTrial {
     System.out.println(lineOne.angle(lineTwo));
     System.out.println(lineTwo.angle(lineOne));
     System.out.println(lineOne.getDirection().getX());
-    System.out.println(lineOne.getDirection().getY());
+    System.out.println(precision.gte(lineOne.getDirection().getY(), 0)); //Gives true when Y >= 0
     System.out.println(lineTwo.getDirection().getX());
     System.out.println(lineTwo.getDirection().getY());
   }

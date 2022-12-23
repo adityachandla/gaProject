@@ -2,11 +2,16 @@ package com.ga.util;
 
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.geometry.euclidean.twod.Line;
 import org.apache.commons.geometry.euclidean.twod.Lines;
 import org.apache.commons.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.numbers.core.Precision;
 
+@Slf4j
 public class GeometryUtil {
+  private static final Precision.DoubleEquivalence precision = Precision.doubleEquivalenceOfEpsilon(1e-20);
+
   public enum OrientationResult {
     RIGHT, LEFT, COLLINEAR
   }
@@ -28,7 +33,7 @@ public class GeometryUtil {
    * @return OrientationResult
    */
   public static OrientationResult orientationTest(Point p, Point q, Point r) {
-    int res = (p.getX() * (q.getY() - r.getY())) + (q.getX() * (r.getY() - p.getY())) +
+    long res = (p.getX() * (q.getY() - r.getY())) + (q.getX() * (r.getY() - p.getY())) +
         (r.getX() * (p.getY() - q.getY()));
     if (res == 0) {
       return OrientationResult.COLLINEAR;
@@ -42,7 +47,7 @@ public class GeometryUtil {
     var prevNext = getPrevNext(p);
     var prev = prevNext.prev();
     var next = prevNext.next();
-    var directionChange = getDirectionChangeY(prev, next);
+    DirectionChange directionChange = getDirectionChangeY(prev, next);
     if (directionChange == DirectionChange.NONE) {
       return PointType.REGULAR;
     }
@@ -52,7 +57,7 @@ public class GeometryUtil {
       return directionChange == DirectionChange.UP_TO_DOWN ? PointType.START : PointType.END;
     }
     if (orientation == OrientationResult.RIGHT) {
-      //Start or end: check if direction change from top to bottom or bottom to top
+      //Split or merge: check if direction change from top to bottom or bottom to top
       return directionChange == DirectionChange.UP_TO_DOWN ? PointType.SPLIT : PointType.MERGE;
     }
     //If there is direction change then the three points can not be COLLINEAR
@@ -60,17 +65,42 @@ public class GeometryUtil {
   }
 
   private static DirectionChange getDirectionChangeY(LineSegment prev, LineSegment next) {
-    var precision = Precision.doubleEquivalenceOfEpsilon(1e-10);
+
     var prevSegment = Lines.fromPoints(toVector2D(prev.getStart()), toVector2D(prev.getEnd()), precision);
     var nextSegment = Lines.fromPoints(toVector2D(next.getStart()), toVector2D(next.getEnd()), precision);
-    var prevDirection = prevSegment.getDirection();
-    var nextDirection = nextSegment.getDirection();
-    if (prevDirection.getY() > 0 && nextDirection.getY() < 0) {
+
+    if (goingUp(prevSegment) && goingDown(nextSegment)) {
       return DirectionChange.UP_TO_DOWN;
-    } else if (prevDirection.getY() < 0 && nextDirection.getY() > 0) {
+    } else if (goingDown(prevSegment) && goingUp(nextSegment)) {
       return DirectionChange.DOWN_TO_UP;
+    } else if (goingDown(prevSegment) && goingDown(nextSegment)) {
+      return DirectionChange.NONE;
+    } else if (goingUp(prevSegment) && goingUp(nextSegment)) {
+      return DirectionChange.NONE;
+    } else if (straight(prevSegment) && goingUp(nextSegment)) {
+      return DirectionChange.NONE;
+    } else if (straight(prevSegment) && goingDown(nextSegment)) {
+      return DirectionChange.UP_TO_DOWN;
+    } else if (goingUp(prevSegment) && straight(nextSegment)) {
+      return DirectionChange.NONE;
+    } else if (goingDown(prevSegment) && straight(nextSegment)) {
+      return DirectionChange.DOWN_TO_UP;
+    } else if (straight(prevSegment) && straight(nextSegment)) {
+      return DirectionChange.NONE;
     }
-    return DirectionChange.NONE;
+    throw new IllegalStateException("Invalid");
+  }
+
+  private static boolean goingUp(Line line) {
+    return precision.gt(line.getDirection().getY(), 0);
+  }
+
+  private static boolean goingDown(Line line) {
+    return precision.lt(line.getDirection().getY(), 0);
+  }
+
+  private static boolean straight(Line line) {
+    return precision.eq(line.getDirection().getY(), 0);
   }
 
   private static Vector2D toVector2D(Point p) {

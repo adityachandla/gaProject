@@ -3,6 +3,7 @@ package com.ga.util;
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
 import com.ga.data.Polygon;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,22 +11,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
 
+@Slf4j
 public class YMonotoneConverter {
 
   public static List<LineSegment> getSegmentsToMakeYMonotone(Polygon polygon) {
     //Going from top to bottom and left to right
-    var comparator = Comparator.comparingInt(Point::getY)
+    var comparator = Comparator.comparingLong(Point::getY)
         .reversed()
-        .thenComparingInt(Point::getX);
+        .thenComparingLong(Point::getX);
     polygon.getPoints().sort(comparator);
 
     //Sort lines on the basis of x coordinate of starting point
-    var leftLines = new TreeSet<LineSegment>(Comparator.comparingInt(line -> line.getStart().getX()));
+    var leftLines = new TreeSet<LineSegment>(Comparator.comparingLong(line -> line.getStart().getX()));
     var helper = new HashMap<LineSegment, Point>();
 
     var lineSegmentsToAdd = new ArrayList<LineSegment>();
     for (var point : polygon.getPoints()) {
       var pointType = GeometryUtil.getPointType(point);
+      log.info("Point {} is of type {} (hole:{})", point, pointType, point.isHole());
       switch (pointType) {
         case SPLIT -> lineSegmentsToAdd.add(handleSplit(point, leftLines, helper));
         case MERGE -> lineSegmentsToAdd.addAll(handleMerge(point, leftLines, helper));
@@ -61,7 +64,7 @@ public class YMonotoneConverter {
 
     var lineToLeft = leftLines.lower(new LineSegment(point, null));
     var leftCandidate = helper.get(lineToLeft);
-    if (GeometryUtil.getPointType(leftCandidate) == GeometryUtil.PointType.MERGE) {
+    if (leftCandidate != null && GeometryUtil.getPointType(leftCandidate) == GeometryUtil.PointType.MERGE) {
       linesAdded.add(new LineSegment(point, leftCandidate));
     }
     helper.put(lineToLeft, point);
@@ -80,7 +83,6 @@ public class YMonotoneConverter {
     var prevNext = GeometryUtil.getPrevNext(point);
     var leftEdge = prevNext.prev();
     var candidate = helper.get(leftEdge);
-    assert candidate != null;
     if (GeometryUtil.getPointType(candidate) == GeometryUtil.PointType.MERGE) {
       linesAdded.add(new LineSegment(candidate, point));
     }
@@ -92,22 +94,22 @@ public class YMonotoneConverter {
                                                  TreeSet<LineSegment> leftLines,
                                                  HashMap<LineSegment, Point> helper) {
     var linesAdded = new ArrayList<LineSegment>(1);
-    if (isPolygonToTheRight(point)) {
-      var upperLower = getUpperLower(point);
-      //Handle lower
-      leftLines.add(upperLower.lower());
-      helper.put(upperLower.lower(), point);
-
+    if (canJoinToRight(point)) {
+      var upperLower = getUpperLowerForRegular(point);
       //Handle upper
       var upperHelper = helper.get(upperLower.upper());
-      if (GeometryUtil.getPointType(upperHelper) == GeometryUtil.PointType.MERGE) {
+      if (upperHelper != null && GeometryUtil.getPointType(upperHelper) == GeometryUtil.PointType.MERGE) {
         linesAdded.add(new LineSegment(upperHelper, point));
       }
       leftLines.remove(upperLower.upper());
+
+      //Handle lower
+      leftLines.add(upperLower.lower());
+      helper.put(upperLower.lower(), point);
     } else {
       var leftLine = leftLines.lower(new LineSegment(point, null));
       var leftLineHelper = helper.get(leftLine);
-      if (GeometryUtil.getPointType(leftLineHelper) == GeometryUtil.PointType.MERGE) {
+      if (leftLineHelper != null && GeometryUtil.getPointType(leftLineHelper) == GeometryUtil.PointType.MERGE) {
         linesAdded.add(new LineSegment(leftLineHelper, point));
       }
       helper.put(leftLine, point);
@@ -118,21 +120,30 @@ public class YMonotoneConverter {
   /**
    * In a hole if we are going up within a hole then polygon is to the right
    * If we are going down in the outer boundary then the polygon is to the right
-   *
+   * NOTE gives false negatives
    * @param point A point of polygon or hole
    * @return is the polygon to the right
    */
-  private static boolean isPolygonToTheRight(Point point) {
+  private static boolean canJoinToRight(Point point) {
     var prevNext = GeometryUtil.getPrevNext(point);
-    return prevNext.next().getEnd().getY() <= point.getY();
+    var nextY = prevNext.next().getEnd().getY();
+    if (point.isHole()) {
+      return nextY <= point.getY();
+    }
+    return nextY < point.getY();
   }
 
-  //TODO handle degenerate cases
-  private static UpperLower getUpperLower(Point p) {
+  private static UpperLower getUpperLowerForRegular(Point p) {
     var prevNext = GeometryUtil.getPrevNext(p);
-    int prevY = prevNext.prev().getStart().getY();
-    int nextY = prevNext.next().getEnd().getY();
+    long prevY = prevNext.prev().getStart().getY();
+    long nextY = prevNext.next().getEnd().getY();
     if (prevY > nextY) {
+      return new UpperLower(prevNext.prev(), prevNext.next());
+    } else if (prevY < nextY) {
+      return new UpperLower(prevNext.next(), prevNext.prev());
+    }
+    //Both y are equal
+    if (p.isHole()) {
       return new UpperLower(prevNext.prev(), prevNext.next());
     }
     return new UpperLower(prevNext.next(), prevNext.prev());

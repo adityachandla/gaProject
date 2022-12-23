@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Point {
-  private int x, y;
+  private long x, y;
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   private List<LineSegment> segments = new ArrayList<>();

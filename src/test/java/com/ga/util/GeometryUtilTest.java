@@ -1,5 +1,6 @@
 package com.ga.util;
 
+import com.ga.data.LineSegment;
 import com.ga.data.Point;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +30,62 @@ class GeometryUtilTest {
     Point b = new Point(20,20);
     Point c = new Point(6,4);
     assertEquals(GeometryUtil.orientationTest(a,b,c), GeometryUtil.OrientationResult.RIGHT);
+  }
+
+  @Test
+  public void testEnd() {
+    Point a = new Point(24, 42);
+    Point b = new Point(40, 21);
+    Point c = new Point(61, 44);
+    var segOne = new LineSegment(a,b);
+    segOne.addReferenceToPoints();
+    var segTwo = new LineSegment(b,c);
+    segTwo.addReferenceToPoints();
+    segOne.setNext(segTwo);
+    segTwo.setPrev(segOne);
+    assertEquals(GeometryUtil.getPointType(b), GeometryUtil.PointType.END);
+  }
+
+  @Test
+  public void testMerge() {
+    Point a = new Point(24, 42);
+    Point b = new Point(40, 21);
+    Point c = new Point(61, 44);
+    var segOne = new LineSegment(c,b);
+    segOne.addReferenceToPoints();
+    var segTwo = new LineSegment(b,a);
+    segTwo.addReferenceToPoints();
+    segOne.setNext(segTwo);
+    segTwo.setPrev(segOne);
+    assertEquals(GeometryUtil.getPointType(b), GeometryUtil.PointType.MERGE);
+  }
+
+  @Test
+  public void testStart() {
+    Point a = new Point(19, 21);
+    Point b = new Point(39, 52);
+    Point c = new Point(61, 25);
+    var segOne = new LineSegment(c,b);
+    segOne.addReferenceToPoints();
+    var segTwo = new LineSegment(b,a);
+    segTwo.addReferenceToPoints();
+    segOne.setNext(segTwo);
+    segTwo.setPrev(segOne);
+    assertEquals(GeometryUtil.getPointType(b), GeometryUtil.PointType.START);
+  }
+
+  @Test
+  public void testSplit() {
+    Point a = new Point(19, 21);
+    Point b = new Point(39, 52);
+    Point c = new Point(61, 25);
+    var segOne = new LineSegment(a,b);
+    segOne.addReferenceToPoints();
+    var segTwo = new LineSegment(b,c);
+    segTwo.addReferenceToPoints();
+    segOne.setNext(segTwo);
+    segTwo.setPrev(segOne);
+    assertEquals(GeometryUtil.getPointType(b), GeometryUtil.PointType.SPLIT);
   }
 
 }
