@@ -77,18 +77,22 @@ public class GeometryUtil {
       return DirectionChange.NONE;
     } else if (goingUp(prevSegment) && goingUp(nextSegment)) {
       return DirectionChange.NONE;
-    } else if (straight(prevSegment) && goingUp(nextSegment)) {
-      return DirectionChange.NONE;
-    } else if (straight(prevSegment) && goingDown(nextSegment)) {
-      return DirectionChange.UP_TO_DOWN;
-    } else if (goingUp(prevSegment) && straight(nextSegment)) {
-      return DirectionChange.NONE;
-    } else if (goingDown(prevSegment) && straight(nextSegment)) {
-      return DirectionChange.DOWN_TO_UP;
-    } else if (straight(prevSegment) && straight(nextSegment)) {
-      return DirectionChange.NONE;
     }
-    throw new IllegalStateException("Invalid");
+    //going right and going left is also important here
+    else if (straight(prevSegment) && goingUp(nextSegment)) {
+      return goingLeft(prevSegment) ? DirectionChange.NONE : DirectionChange.DOWN_TO_UP;
+    } else if (straight(prevSegment) && goingDown(nextSegment)) {
+      return goingLeft(prevSegment) ? DirectionChange.UP_TO_DOWN : DirectionChange.NONE;
+    } else if (goingUp(prevSegment) && straight(nextSegment)) {
+      return goingLeft(nextSegment) ? DirectionChange.NONE: DirectionChange.UP_TO_DOWN;
+    } else if (goingDown(prevSegment) && straight(nextSegment)) {
+      return goingLeft(nextSegment) ? DirectionChange.DOWN_TO_UP : DirectionChange.NONE;
+    }
+    throw new IllegalStateException("Invalid Direction change");
+  }
+
+  private static boolean goingLeft(Line line) {
+    return precision.lt(line.getDirection().getX(), 0);
   }
 
   private static boolean goingUp(Line line) {

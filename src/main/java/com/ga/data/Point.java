@@ -29,4 +29,10 @@ public class Point {
     this.x = x;
     this.y = y;
   }
+
+  public Point(Point other) {
+    this.x = other.x;
+    this.y = other.y;
+    this.isHole = other.isHole;
+  }
 }

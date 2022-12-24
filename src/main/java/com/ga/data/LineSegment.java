@@ -16,6 +16,10 @@ public class LineSegment {
   @ToString.Exclude
   private LineSegment prev;
 
+  @EqualsAndHashCode.Exclude
+  @ToString.Exclude
+  private LineSegment sibling;
+
   public LineSegment(Point start, Point end) {
     this.start = start;
     this.end = end;
@@ -26,8 +30,9 @@ public class LineSegment {
     end.getSegments().add(this);
   }
 
-  public void deleteReferenceFromPoints() {
-    start.getSegments().remove(this);
-    end.getSegments().remove(this);
+  public void swapPoints() {
+    var startCopy = this.start;
+    this.start = end;
+    this.end = startCopy;
   }
 }

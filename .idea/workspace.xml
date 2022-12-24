@@ -4,15 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Added code to convert to Y-monotone.">
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Bugfixes. Code now runs on all instances.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customInstances/mergeSplit.json" beforeDir="false" afterPath="$PROJECT_DIR$/customInstances/mergeSplit.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customInstances/degenerate.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/ConvexConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/YMonotoneConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/YMonotoneConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryUtilTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryUtilTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +79,7 @@
     <configuration name="Converter" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Converter" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/geogebra.xml $PROJECT_DIR$/customInstances/degenerate.json" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/geogebra.xml $PROJECT_DIR$/customInstances/twoHoles.json" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ga.*" />
@@ -90,7 +93,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/customInstances" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ga.*" />
@@ -101,27 +104,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GeometryUtilTest.testEnd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gaProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ga.util" />
-      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryUtilTest" />
-      <option name="METHOD_NAME" value="testEnd" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GeometryUtilTest.testMerge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="PATTERN" value="com.ga.convex.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -133,11 +120,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GeometryUtilTest.testSplit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GeometryUtilTest.testRegular" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ga.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ga.util" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryUtilTest" />
+      <option name="METHOD_NAME" value="testRegular" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeometryUtilTest.testSameY" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gaProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ga.util" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryUtilTest" />
+      <option name="METHOD_NAME" value="testSameY" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeometryUtilTest.testSplit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gaProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ga.convex.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -149,37 +168,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GeometryUtilTest.testStart" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gaProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ga.util" />
-      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryUtilTest" />
-      <option name="METHOD_NAME" value="testStart" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Converter" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.GeometryUtilTest.testEnd" />
+      <item itemvalue="JUnit.GeometryUtilTest.testRegular" />
+      <item itemvalue="JUnit.GeometryUtilTest.testSameY" />
       <item itemvalue="JUnit.GeometryUtilTest.testMerge" />
       <item itemvalue="JUnit.GeometryUtilTest.testSplit" />
-      <item itemvalue="JUnit.GeometryUtilTest.testStart" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.GeometryUtilTest.testSameY" />
+        <item itemvalue="JUnit.GeometryUtilTest.testRegular" />
         <item itemvalue="JUnit.GeometryUtilTest.testMerge" />
         <item itemvalue="JUnit.GeometryUtilTest.testSplit" />
-        <item itemvalue="JUnit.GeometryUtilTest.testStart" />
-        <item itemvalue="JUnit.GeometryUtilTest.testEnd" />
       </list>
     </recent_temporary>
   </component>
@@ -234,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671716933253</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Bugfixes. Code now runs on all instances.">
+      <created>1671805231400</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671805231400</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -255,10 +265,11 @@
     <MESSAGE value="Added orientation test and began writing plane sweep for Y monotone." />
     <MESSAGE value="Added point identification code. Does not work for holes yet." />
     <MESSAGE value="Added code to convert to Y-monotone." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added code to convert to Y-monotone." />
+    <MESSAGE value="Bugfixes. Code now runs on all instances." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bugfixes. Code now runs on all instances." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/gaProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1671791225951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/gaProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1671805950127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.ga.*</FILTER>
     </SUITE>
   </component>

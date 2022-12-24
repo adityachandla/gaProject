@@ -1,7 +1,7 @@
 package com.ga;
 
 import com.ga.io.Reader;
-import com.ga.util.ConvexConverter;
+import com.ga.convex.ConvexConverter;
 import com.ga.util.PolygonCreationUtil;
 import lombok.extern.slf4j.Slf4j;
 

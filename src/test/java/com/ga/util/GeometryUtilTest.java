@@ -88,4 +88,18 @@ class GeometryUtilTest {
     assertEquals(GeometryUtil.getPointType(b), GeometryUtil.PointType.SPLIT);
   }
 
+  @Test
+  public void testSameY() {
+    var a = new Point(13,13);
+    var b = new Point(13,14);
+    var c = new Point(15,14);
+    var segOne = new LineSegment(a,b);
+    var segTwo = new LineSegment(b,c);
+    segOne.addReferenceToPoints();
+    segTwo.addReferenceToPoints();
+    segOne.setNext(segTwo);
+    segTwo.setPrev(segOne);
+    assertEquals(GeometryUtil.getPointType(b), GeometryUtil.PointType.SPLIT);
+  }
+
 }

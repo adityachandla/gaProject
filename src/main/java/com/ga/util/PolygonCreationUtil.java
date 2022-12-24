@@ -4,10 +4,12 @@ import com.ga.data.LineSegment;
 import com.ga.data.Point;
 import com.ga.data.Polygon;
 import com.ga.data.ProblemInstance;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class PolygonCreationUtil {
 
   public static Polygon createPolygon(ProblemInstance problemInstance) {
@@ -32,12 +34,12 @@ public class PolygonCreationUtil {
     startSegment.addReferenceToPoints();
     var curr = startSegment;
     for (int i = 2; i < boundary.size(); i++) {
-      var newSegment = new LineSegment(boundary.get(i-1), boundary.get(i));
+      var newSegment = new LineSegment(boundary.get(i - 1), boundary.get(i));
       newSegment.addReferenceToPoints();
       linkSegments(curr, newSegment);
       curr = newSegment;
     }
-    var connectorSegment = new LineSegment(boundary.get(boundary.size()-1), boundary.get(0));
+    var connectorSegment = new LineSegment(boundary.get(boundary.size() - 1), boundary.get(0));
     connectorSegment.addReferenceToPoints();
     linkSegments(curr, connectorSegment);
     linkSegments(connectorSegment, startSegment);
