@@ -7,7 +7,6 @@ import com.ga.util.GeometryUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +41,7 @@ public class YMonotoneConverter {
   }
 
   private static LineSegment handleSplit(Point point, TreeSet<LineSegment> leftLines, HashMap<LineSegment, Point> helper) {
-    var lineToLeft = leftLines.lower(new LineSegment(point, null));
+    var lineToLeft = getSegmentToLeft(point, leftLines);
     var segmentCreated = new LineSegment(point, helper.get(lineToLeft));
     helper.put(lineToLeft, point);
 
@@ -63,9 +62,9 @@ public class YMonotoneConverter {
     }
     leftLines.remove(rightEdge);
 
-    var lineToLeft = leftLines.lower(new LineSegment(point, null));
+    var lineToLeft = getSegmentToLeft(point, leftLines);
     var leftCandidate = helper.get(lineToLeft);
-    if (leftCandidate != null && GeometryUtil.getPointType(leftCandidate) == GeometryUtil.PointType.MERGE) {
+    if (GeometryUtil.getPointType(leftCandidate) == GeometryUtil.PointType.MERGE) {
       linesAdded.add(new LineSegment(point, leftCandidate));
     }
     helper.put(lineToLeft, point);
@@ -96,7 +95,6 @@ public class YMonotoneConverter {
                                                  HashMap<LineSegment, Point> helper) {
     var linesAdded = new ArrayList<LineSegment>(1);
     if (canJoinToRight(point)) {
-      log.info("Point is {} associated lines are {} is hole: {}", point, point.getSegments(), point.isHole());
       var upperLower = getUpperLowerForRegular(point);
       //Handle upper
       var upperHelper = helper.get(upperLower.upper());
@@ -109,7 +107,7 @@ public class YMonotoneConverter {
       leftLines.add(upperLower.lower());
       helper.put(upperLower.lower(), point);
     } else {
-      var leftLine = leftLines.lower(new LineSegment(point, null));
+      var leftLine = getSegmentToLeft(point, leftLines);
       var leftLineHelper = helper.get(leftLine);
       if (GeometryUtil.getPointType(leftLineHelper) == GeometryUtil.PointType.MERGE) {
         linesAdded.add(new LineSegment(leftLineHelper, point));
@@ -133,7 +131,7 @@ public class YMonotoneConverter {
   }
 
   /**
-   * @param next Next point
+   * @param next    Next point
    * @param current current point
    * @return if next is below curr
    */
@@ -143,13 +141,45 @@ public class YMonotoneConverter {
     } else if (next.getY() > current.getY()) {
       return false;
     }
-    //If next and current are equal then
-    if (next.getX() > current.getX()) {
-      //We are going right so rotating clockwise will make next below current
-      return true;
+    return next.getX() > current.getX();
+  }
+
+  /**
+   * Our tree is based on x coordinate of the start of the segment. This is not
+   * always a point to the left although the line may be to the left. This is a
+   * hack to take care of the edge case.
+   *
+   * @param p        Point
+   * @param segments Tree of line segments
+   * @return Line segment that is to the left
+   */
+  private static LineSegment getSegmentToLeft(Point p, TreeSet<LineSegment> segments) {
+    var querySegment = new LineSegment(p, null);
+    var lower = segments.lower(querySegment);
+    if (lower != null) {
+      return lower;
     }
-    //We are going left and rotating clockwise will make next above current
-    return false;
+    var higher = segments.higher(querySegment);
+    while (!isPointToTheRight(p, higher)) {
+      var next = segments.higher(querySegment);
+      if (next == higher) {
+        //We've reached the end of the tree
+        break;
+      }
+      higher = next;
+    }
+    return higher;
+  }
+
+  private static boolean isPointToTheRight(Point p, LineSegment segment) {
+    var higher = segment.getStart();
+    var lower = segment.getEnd();
+    if (lower.getY() > higher.getY()) {
+      var temp = higher;
+      higher = lower;
+      lower = temp;
+    }
+    return GeometryUtil.orientationTest(higher, lower, p) == GeometryUtil.OrientationResult.RIGHT;
   }
 
   private static UpperLower getUpperLowerForRegular(Point p) {
