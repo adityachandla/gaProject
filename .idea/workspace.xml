@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Fixed lower segment issue in YMonotoneConverter.java">
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Segment addition and pointer update in SegmentAdder.java.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/YMonotoneConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671907903710</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Segment addition and pointer update in SegmentAdder.java.">
+      <created>1671963385194</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671963385194</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,7 +281,8 @@
     <MESSAGE value="Bugfixes. Code now runs on all instances." />
     <MESSAGE value="Fixed bugs related to plane rotation." />
     <MESSAGE value="Fixed lower segment issue in YMonotoneConverter.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed lower segment issue in YMonotoneConverter.java" />
+    <MESSAGE value="Segment addition and pointer update in SegmentAdder.java." />
+    <option name="LAST_COMMIT_MESSAGE" value="Segment addition and pointer update in SegmentAdder.java." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gaProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1671805950127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

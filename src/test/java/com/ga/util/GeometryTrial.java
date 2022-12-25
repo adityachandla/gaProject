@@ -7,9 +7,10 @@ import org.junit.jupiter.api.Test;
 
 public class GeometryTrial {
 
+  private static final Precision.DoubleEquivalence precision = Precision.doubleEquivalenceOfEpsilon(1e-10);
+
   @Test
   public void testAngle() {
-    var precision = Precision.doubleEquivalenceOfEpsilon(1e-10);
     var lineOne = Lines.fromPoints(Vector2D.of(20, 30), Vector2D.of(40,50), precision);
     var lineTwo = Lines.fromPoints(Vector2D.of(40,50), Vector2D.of(20, 11), precision);
     System.out.println(lineOne.angle(lineTwo));

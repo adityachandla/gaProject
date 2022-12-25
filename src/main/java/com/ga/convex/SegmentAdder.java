@@ -2,10 +2,10 @@ package com.ga.convex;
 
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
-import com.ga.data.Polygon;
 import com.ga.util.GeometryUtil;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,31 +13,50 @@ import java.util.Set;
 @Slf4j
 public class SegmentAdder {
   public static List<LineSegment> addLineSegments(List<LineSegment> toAdd) {
+    Set<LineSegment> doubleSegments = getDoubleSegments(toAdd);
+    Set<LineSegment> seenDoubleSegments = new HashSet<>();
+    List<LineSegment> distinctPolygonSegments = new ArrayList<>();
+    for (var segment : doubleSegments) {
+      if (seenDoubleSegments.contains(segment)) {
+        continue;
+      }
+      distinctPolygonSegments.add(segment);
+      loopOver(segment, seenDoubleSegments);
+    }
+    return distinctPolygonSegments;
+  }
+
+  private static void loopOver(LineSegment segment, Set<LineSegment> seen) {
+    var curr = segment;
+    do {
+      if (curr.getSibling() != null) {
+        seen.add(curr);
+      }
+      curr = curr.getNext();
+    } while (curr != segment);
+  }
+
+  private static Set<LineSegment> getDoubleSegments(List<LineSegment> segments) {
     Set<LineSegment> doubleSegments = new HashSet<>();
-    for (var segment : toAdd) {
+    for (var segment : segments) {
       var startPoint = segment.getStart();
       var endPoint = segment.getEnd();
-      var addedSegment = addSegment(startPoint, endPoint);
+      var addedSegment = createSegment(startPoint, endPoint);
       doubleSegments.add(addedSegment);
       assert addedSegment.getSibling() != null;
       doubleSegments.add(addedSegment.getSibling());
     }
-    return List.of();
-  }
-  private static void loopOver(LineSegment start) {
-    var curr = start;
-    do {
-      curr = curr.getNext();
-    } while(curr != start);
+    return doubleSegments;
   }
 
   /**
-   * Lesson for life: This is what happens when everything points to everything
-   * @param start
-   * @param end
-   * @return
+   * Life Lesson: This is what happens when everything points to everything
+   *
+   * @param start Start point of the segment
+   * @param end end point of the segment
+   * @return One of the two line segments added. We can get the other using getSibling.
    */
-  private static LineSegment addSegment(Point start, Point end) {
+  public static LineSegment createSegment(Point start, Point end) {
     var startCopy = new Point(start);
     var endCopy = new Point(end);
 
