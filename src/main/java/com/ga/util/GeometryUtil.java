@@ -20,8 +20,12 @@ public class GeometryUtil {
     START, SPLIT, END, MERGE, REGULAR
   }
 
-  private enum DirectionChange {
+  private enum DirectionChangeY {
     NONE, UP_TO_DOWN, DOWN_TO_UP
+  }
+
+  public enum DirectionX {
+    LEFT, RIGHT, LEFT_TO_RIGHT, RIGHT_TO_LEFT
   }
 
   /**
@@ -47,52 +51,83 @@ public class GeometryUtil {
     var prevNext = getPrevNext(p);
     var prev = prevNext.prev();
     var next = prevNext.next();
-    DirectionChange directionChange = getDirectionChangeY(prev, next);
-    if (directionChange == DirectionChange.NONE) {
+    DirectionChangeY directionChangeY = getDirectionChangeY(prev, next);
+    if (directionChangeY == DirectionChangeY.NONE) {
       return PointType.REGULAR;
     }
     var orientation = orientationTest(prev.getStart(), prev.getEnd(), next.getEnd());
     if (orientation == OrientationResult.LEFT) {
       //Start or end: check if direction change from top to bottom or bottom to top
-      return directionChange == DirectionChange.UP_TO_DOWN ? PointType.START : PointType.END;
+      return directionChangeY == DirectionChangeY.UP_TO_DOWN ? PointType.START : PointType.END;
     }
     if (orientation == OrientationResult.RIGHT) {
       //Split or merge: check if direction change from top to bottom or bottom to top
-      return directionChange == DirectionChange.UP_TO_DOWN ? PointType.SPLIT : PointType.MERGE;
+      return directionChangeY == DirectionChangeY.UP_TO_DOWN ? PointType.SPLIT : PointType.MERGE;
     }
     //If there is direction change then the three points can not be COLLINEAR
     throw new IllegalStateException("Points can not be COLLINEAR with direction change");
   }
 
-  private static DirectionChange getDirectionChangeY(LineSegment prev, LineSegment next) {
-
+  private static DirectionChangeY getDirectionChangeY(LineSegment prev, LineSegment next) {
     var prevSegment = Lines.fromPoints(toVector2D(prev.getStart()), toVector2D(prev.getEnd()), precision);
     var nextSegment = Lines.fromPoints(toVector2D(next.getStart()), toVector2D(next.getEnd()), precision);
 
     if (goingUp(prevSegment) && goingDown(nextSegment)) {
-      return DirectionChange.UP_TO_DOWN;
+      return DirectionChangeY.UP_TO_DOWN;
     } else if (goingDown(prevSegment) && goingUp(nextSegment)) {
-      return DirectionChange.DOWN_TO_UP;
+      return DirectionChangeY.DOWN_TO_UP;
     } else if (goingDown(prevSegment) && goingDown(nextSegment)) {
-      return DirectionChange.NONE;
+      return DirectionChangeY.NONE;
     } else if (goingUp(prevSegment) && goingUp(nextSegment)) {
-      return DirectionChange.NONE;
+      return DirectionChangeY.NONE;
     }
     //going right and going left is also important here
-    else if (straight(prevSegment) && goingUp(nextSegment)) {
-      return goingLeft(prevSegment) ? DirectionChange.NONE : DirectionChange.DOWN_TO_UP;
-    } else if (straight(prevSegment) && goingDown(nextSegment)) {
-      return goingLeft(prevSegment) ? DirectionChange.UP_TO_DOWN : DirectionChange.NONE;
-    } else if (goingUp(prevSegment) && straight(nextSegment)) {
-      return goingLeft(nextSegment) ? DirectionChange.NONE: DirectionChange.UP_TO_DOWN;
-    } else if (goingDown(prevSegment) && straight(nextSegment)) {
-      return goingLeft(nextSegment) ? DirectionChange.DOWN_TO_UP : DirectionChange.NONE;
+    else if (straightY(prevSegment) && goingUp(nextSegment)) {
+      return goingLeft(prevSegment) ? DirectionChangeY.NONE : DirectionChangeY.DOWN_TO_UP;
+    } else if (straightY(prevSegment) && goingDown(nextSegment)) {
+      return goingLeft(prevSegment) ? DirectionChangeY.UP_TO_DOWN : DirectionChangeY.NONE;
+    } else if (goingUp(prevSegment) && straightY(nextSegment)) {
+      return goingLeft(nextSegment) ? DirectionChangeY.NONE : DirectionChangeY.UP_TO_DOWN;
+    } else if (goingDown(prevSegment) && straightY(nextSegment)) {
+      return goingLeft(nextSegment) ? DirectionChangeY.DOWN_TO_UP : DirectionChangeY.NONE;
     }
     throw new IllegalStateException("Invalid Direction change");
   }
 
+  public static DirectionX getDirectionChangeX(PrevNext prevNext) {
+    return getDirectionChangeX(prevNext.prev(), prevNext.next());
+  }
+
+  public static DirectionX getDirectionChangeX(LineSegment prev, LineSegment next) {
+    var prevSegment = Lines.fromPoints(toVector2D(prev.getStart()), toVector2D(prev.getEnd()), precision);
+    var nextSegment = Lines.fromPoints(toVector2D(next.getStart()), toVector2D(next.getEnd()), precision);
+
+    if (goingRight(prevSegment) && goingRight(nextSegment)) {
+      return DirectionX.RIGHT;
+    } else if (goingLeft(prevSegment) && goingLeft(nextSegment)) {
+      return DirectionX.LEFT;
+    } else if (goingLeft(prevSegment) && goingRight(nextSegment)) {
+      return DirectionX.LEFT_TO_RIGHT;
+    } else if (goingRight(prevSegment) && goingLeft(nextSegment)) {
+      return DirectionX.RIGHT_TO_LEFT;
+    } else if (straightX(prevSegment) && goingRight(nextSegment)) {
+      return goingUp(prevSegment) ? DirectionX.RIGHT : DirectionX.LEFT_TO_RIGHT;
+    } else if (straightX(prevSegment) && goingLeft(nextSegment)) {
+      return goingUp(prevSegment) ? DirectionX.RIGHT_TO_LEFT : DirectionX.LEFT;
+    } else if (goingLeft(prevSegment) && straightX(nextSegment)) {
+      return goingUp(nextSegment) ? DirectionX.LEFT_TO_RIGHT : DirectionX.LEFT;
+    } else if (goingRight(prevSegment) && straightX(nextSegment)) {
+      return goingUp(nextSegment) ? DirectionX.RIGHT : DirectionX.RIGHT_TO_LEFT;
+    }
+    throw new IllegalStateException("Invalid direction change X");
+  }
+
   private static boolean goingLeft(Line line) {
     return precision.lt(line.getDirection().getX(), 0);
+  }
+
+  private static boolean goingRight(Line line) {
+    return precision.gt(line.getDirection().getX(), 0);
   }
 
   private static boolean goingUp(Line line) {
@@ -103,8 +138,12 @@ public class GeometryUtil {
     return precision.lt(line.getDirection().getY(), 0);
   }
 
-  private static boolean straight(Line line) {
+  private static boolean straightY(Line line) {
     return precision.eq(line.getDirection().getY(), 0);
+  }
+
+  private static boolean straightX(Line line) {
+    return precision.eq(line.getDirection().getX(), 0);
   }
 
   private static Vector2D toVector2D(Point p) {

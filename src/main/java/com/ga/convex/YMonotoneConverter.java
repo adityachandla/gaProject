@@ -160,18 +160,13 @@ public class YMonotoneConverter {
       return lower;
     }
     var higher = segments.higher(querySegment);
-    while (!isPointToTheRight(p, higher)) {
-      var next = segments.higher(querySegment);
-      if (next == higher) {
-        //We've reached the end of the tree
-        break;
-      }
-      higher = next;
+    while (isPointToTheLeft(p, higher)) {
+      higher = segments.higher(higher);
     }
     return higher;
   }
 
-  private static boolean isPointToTheRight(Point p, LineSegment segment) {
+  private static boolean isPointToTheLeft(Point p, LineSegment segment) {
     var higher = segment.getStart();
     var lower = segment.getEnd();
     if (lower.getY() > higher.getY()) {
@@ -179,7 +174,7 @@ public class YMonotoneConverter {
       higher = lower;
       lower = temp;
     }
-    return GeometryUtil.orientationTest(higher, lower, p) == GeometryUtil.OrientationResult.RIGHT;
+    return GeometryUtil.orientationTest(lower, higher, p) == GeometryUtil.OrientationResult.LEFT;
   }
 
   private static UpperLower getUpperLowerForRegular(Point p) {

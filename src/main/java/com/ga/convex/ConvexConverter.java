@@ -12,7 +12,7 @@ public class ConvexConverter {
   public static void convertToConvexPolygons(Polygon polygon) {
     List<LineSegment> segmentsToAdd = YMonotoneConverter.getSegmentsToMakeYMonotone(polygon);
     log.info("Adding {} lines to make it Y-monotone", segmentsToAdd.size());
-//    List<LineSegment> polygons = SegmentAdder.addLineSegments(segmentsToAdd);
+    List<LineSegment> polygons = SegmentAdder.addLineSegments(segmentsToAdd);
   }
 
 }

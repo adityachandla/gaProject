@@ -14,23 +14,16 @@ import java.util.Set;
 public class SegmentAdder {
   public static List<LineSegment> addLineSegments(List<LineSegment> toAdd) {
     Set<LineSegment> doubleSegments = new HashSet<>();
-    for (var segmentOne : toAdd) {
-      log.info("Adding segment {}", segmentOne);
-      var startPoint = segmentOne.getStart();
-      var endPoint = segmentOne.getEnd();
-      var startType = GeometryUtil.getPointType(startPoint);
-      var endType = GeometryUtil.getPointType(endPoint);
-      if (endType == GeometryUtil.PointType.MERGE || startType == GeometryUtil.PointType.SPLIT) {
-        segmentOne.swapPoints();
-        startPoint = segmentOne.getStart();
-        endPoint = segmentOne.getEnd();
-      }
-      doubleSegments.add(addSegment(startPoint, endPoint, segmentOne));
-      doubleSegments.add(segmentOne);
+    for (var segment : toAdd) {
+      var startPoint = segment.getStart();
+      var endPoint = segment.getEnd();
+      var addedSegment = addSegment(startPoint, endPoint);
+      doubleSegments.add(addedSegment);
+      assert addedSegment.getSibling() != null;
+      doubleSegments.add(addedSegment.getSibling());
     }
     return List.of();
   }
-
   private static void loopOver(LineSegment start) {
     var curr = start;
     do {
@@ -38,36 +31,48 @@ public class SegmentAdder {
     } while(curr != start);
   }
 
-  private static LineSegment addSegment(Point startPoint, Point endPoint, LineSegment segmentOne) {
-    var startPointCopy = new Point(startPoint);
-    var endPointCopy = new Point(endPoint);
+  /**
+   * Lesson for life: This is what happens when everything points to everything
+   * @param start
+   * @param end
+   * @return
+   */
+  private static LineSegment addSegment(Point start, Point end) {
+    var startCopy = new Point(start);
+    var endCopy = new Point(end);
 
-    var startSegments = GeometryUtil.getPrevNext(startPoint);
-    var endSegments = GeometryUtil.getPrevNext(endPoint);
-    //Start to end is already added created, we'll also create end to start
-    var segmentTwo = new LineSegment(endPointCopy, startPointCopy);
-    segmentTwo.addReferenceToPoints();
+    var segmentOne = new LineSegment(start, endCopy);
+    var segmentTwo = new LineSegment(end, startCopy);
+
     //Set siblings
     segmentTwo.setSibling(segmentOne);
     segmentOne.setSibling(segmentTwo);
 
+    var startSegments = GeometryUtil.getPrevNext(start);
+    var endSegments = GeometryUtil.getPrevNext(end);
     //Remove old segments
-    startPoint.getSegments().remove(startSegments.next());
-    endPoint.getSegments().remove(endSegments.prev());
+    start.getSegments().remove(startSegments.next());
+    end.getSegments().remove(endSegments.next());
 
     //Add new segments
-    startPoint.getSegments().add(segmentOne);
-    endPoint.getSegments().add(segmentOne);
-    startPointCopy.getSegments().add(segmentTwo);
-    startPointCopy.getSegments().add(startSegments.next());
-    endPointCopy.getSegments().add(segmentTwo);
-    endPointCopy.getSegments().add(endSegments.prev());
+    start.getSegments().add(segmentOne);
+    end.getSegments().add(segmentTwo);
+    startCopy.getSegments().add(segmentTwo);
+    startCopy.getSegments().add(startSegments.next());
+    endCopy.getSegments().add(segmentOne);
+    endCopy.getSegments().add(endSegments.next());
 
-    //Add prev and next
+    //Add prev and next to new segments
     segmentOne.setPrev(startSegments.prev());
     segmentOne.setNext(endSegments.next());
     segmentTwo.setPrev(endSegments.prev());
     segmentTwo.setNext(startSegments.next());
+
+    //Update prev and next for old segments
+    startSegments.prev().setNext(segmentOne);
+    endSegments.next().setPrev(segmentOne);
+    startSegments.next().setPrev(segmentTwo);
+    endSegments.prev().setNext(segmentTwo);
 
     return segmentTwo;
   }
