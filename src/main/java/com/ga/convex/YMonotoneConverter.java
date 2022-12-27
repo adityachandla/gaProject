@@ -120,7 +120,6 @@ public class YMonotoneConverter {
   /**
    * In a hole if we are going up within a hole then polygon is to the right
    * If we are going down in the outer boundary then the polygon is to the right
-   * NOTE gives false negatives
    *
    * @param point A point of polygon or hole
    * @return is the polygon to the right
@@ -154,19 +153,17 @@ public class YMonotoneConverter {
    * @return Line segment that is to the left
    */
   private static LineSegment getSegmentToLeft(Point p, TreeSet<LineSegment> segments) {
-    var querySegment = new LineSegment(p, null);
-    var lower = segments.lower(querySegment);
-    if (lower != null) {
-      return lower;
+    var descendingIterator = segments.descendingIterator();
+    while (descendingIterator.hasNext()) {
+      var segment = descendingIterator.next();
+      if (isLineToTheLeft(p, segment)) {
+        return segment;
+      }
     }
-    var higher = segments.higher(querySegment);
-    while (isPointToTheLeft(p, higher)) {
-      higher = segments.higher(higher);
-    }
-    return higher;
+    throw new IllegalStateException("No line found");
   }
 
-  private static boolean isPointToTheLeft(Point p, LineSegment segment) {
+  private static boolean isLineToTheLeft(Point p, LineSegment segment) {
     var higher = segment.getStart();
     var lower = segment.getEnd();
     if (lower.getY() > higher.getY()) {
@@ -174,7 +171,7 @@ public class YMonotoneConverter {
       higher = lower;
       lower = temp;
     }
-    return GeometryUtil.orientationTest(lower, higher, p) == GeometryUtil.OrientationResult.LEFT;
+    return GeometryUtil.orientationTest(lower, higher, p) == GeometryUtil.OrientationResult.RIGHT;
   }
 
   private static UpperLower getUpperLowerForRegular(Point p) {

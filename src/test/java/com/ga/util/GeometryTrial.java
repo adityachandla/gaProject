@@ -20,4 +20,20 @@ public class GeometryTrial {
     System.out.println(lineTwo.getDirection().getX());
     System.out.println(lineTwo.getDirection().getY());
   }
+
+  @Test
+  public void testClockwise() {
+    var p1 = Vector2D.of(55,55);
+    var p2 = Vector2D.of(38,57);
+    var dirOne = Lines.fromPoints(p1,p2, precision);
+    System.out.println(dirOne);
+    var p3 = Vector2D.of(44,66);
+    var dirTwo = Lines.fromPoints(p1,p3, precision);
+    System.out.println(dirTwo);
+    var p4 = Vector2D.of(34, 71);
+    var dirThree = Lines.fromPoints(p1,p4, precision);;
+    System.out.println(dirThree);
+    System.out.println(dirOne.angle(dirTwo));
+    System.out.println(dirTwo.angle(dirThree));
+  }
 }

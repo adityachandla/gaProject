@@ -1,6 +1,7 @@
 package com.ga.convex;
 
 import com.ga.data.LineSegment;
+import com.ga.data.Point;
 import com.ga.data.Polygon;
 import com.ga.util.GeometryUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -21,15 +22,13 @@ public class ConvexConverter {
       if(isConvex(polygonStartSegment)) {
         convexPolygons.add(polygonStartSegment);
       } else {
-        convexPolygons.addAll(triangulateYMonotone(polygonStartSegment));
+        List<LineSegment> triangleSegments = TriangulationUtil.triangulateYMonotone(polygonStartSegment);
+        log.info("Created a triangulation of {} triangles", triangleSegments.size());
+        convexPolygons.addAll(triangleSegments);
       }
     }
     log.info("Returning {} convex polygons", convexPolygons.size());
     return convexPolygons;
-  }
-
-  private static List<LineSegment> triangulateYMonotone(LineSegment startSegment) {
-    return List.of();
   }
 
   private static boolean isConvex(LineSegment segment) {

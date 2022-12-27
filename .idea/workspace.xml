@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Segment addition and pointer update in SegmentAdder.java.">
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Added convexity check on current polygons.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/Boundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/TriangulationUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/BoundaryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/ga/convex/TriangulationUtilTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/YMonotoneConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Record" />
         <option value="JUnit5 Test Class" />
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
@@ -63,11 +69,15 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.ga.convex" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.ga.convex" />
       <recent name="com.ga.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.TriangulationUtilTest.testBoundary">
     <configuration name="Converter" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Converter" />
       <module name="gaProject" />
@@ -85,7 +95,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15/srpg_octa_mc0000784.instance.json" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ga.*" />
@@ -96,7 +106,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GeometryUtilTest.testMerge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GeometryTrial.testClockwise" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
@@ -105,8 +115,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ga.util" />
-      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryUtilTest" />
-      <option name="METHOD_NAME" value="testMerge" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryTrial" />
+      <option name="METHOD_NAME" value="testClockwise" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeometryTrial.testLineToLeft" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gaProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ga.convex.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ga.util" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryTrial" />
+      <option name="METHOD_NAME" value="testLineToLeft" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -116,7 +142,7 @@
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="PATTERN" value="com.ga.convex.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -128,33 +154,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GeometryUtilTest.testRegular" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TriangulationUtilTest.testBoundary" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="PATTERN" value="com.ga.convex.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ga.util" />
-      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryUtilTest" />
-      <option name="METHOD_NAME" value="testRegular" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GeometryUtilTest.testSameY" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gaProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ga.util" />
-      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryUtilTest" />
-      <option name="METHOD_NAME" value="testSameY" />
+      <option name="PACKAGE_NAME" value="com.ga.convex" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.convex.TriangulationUtilTest" />
+      <option name="METHOD_NAME" value="testBoundary" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -163,18 +173,18 @@
     <list>
       <item itemvalue="Application.Converter" />
       <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.GeometryTrial.testClockwise" />
+      <item itemvalue="JUnit.GeometryTrial.testLineToLeft" />
+      <item itemvalue="JUnit.TriangulationUtilTest.testBoundary" />
       <item itemvalue="JUnit.GeometryUtilTest.testOrientation" />
-      <item itemvalue="JUnit.GeometryUtilTest.testRegular" />
-      <item itemvalue="JUnit.GeometryUtilTest.testSameY" />
-      <item itemvalue="JUnit.GeometryUtilTest.testMerge" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TriangulationUtilTest.testBoundary" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.GeometryTrial.testClockwise" />
+        <item itemvalue="JUnit.GeometryTrial.testLineToLeft" />
         <item itemvalue="JUnit.GeometryUtilTest.testOrientation" />
-        <item itemvalue="JUnit.GeometryUtilTest.testSameY" />
-        <item itemvalue="JUnit.GeometryUtilTest.testRegular" />
-        <item itemvalue="JUnit.GeometryUtilTest.testMerge" />
       </list>
     </recent_temporary>
   </component>
@@ -257,7 +267,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671963385194</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added convexity check on current polygons.">
+      <created>1671965626379</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671965626379</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -282,7 +299,8 @@
     <MESSAGE value="Fixed bugs related to plane rotation." />
     <MESSAGE value="Fixed lower segment issue in YMonotoneConverter.java" />
     <MESSAGE value="Segment addition and pointer update in SegmentAdder.java." />
-    <option name="LAST_COMMIT_MESSAGE" value="Segment addition and pointer update in SegmentAdder.java." />
+    <MESSAGE value="Added convexity check on current polygons." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added convexity check on current polygons." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gaProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1671805950127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

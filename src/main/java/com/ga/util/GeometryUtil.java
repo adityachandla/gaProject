@@ -146,7 +146,7 @@ public class GeometryUtil {
     return precision.eq(line.getDirection().getX(), 0);
   }
 
-  private static Vector2D toVector2D(Point p) {
+  public static Vector2D toVector2D(Point p) {
     return Vector2D.of(p.getX(), p.getY());
   }
 

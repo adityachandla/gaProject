@@ -12,8 +12,15 @@ import java.util.Set;
 
 @Slf4j
 public class SegmentAdder {
+  /**
+   * This function updates the pointers to add segments and then loops over added
+   * segments to deduplicate them.
+   * @param toAdd List of segments to add
+   * @return List of starting segments for all polygons
+   */
   public static List<LineSegment> addLineSegments(List<LineSegment> toAdd) {
     Set<LineSegment> doubleSegments = getDoubleSegments(toAdd);
+    log.info("Got double segments {}", doubleSegments);
     Set<LineSegment> seenDoubleSegments = new HashSet<>();
     List<LineSegment> distinctPolygonSegments = new ArrayList<>();
     for (var segment : doubleSegments) {
