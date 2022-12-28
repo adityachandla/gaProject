@@ -25,7 +25,7 @@ public class Point {
   @EqualsAndHashCode.Exclude
   private boolean isHole = false;
 
-  public Point(int x, int y) {
+  public Point(long x, long y) {
     this.x = x;
     this.y = y;
   }

@@ -16,19 +16,8 @@ public class ConvexConverter {
     List<LineSegment> segmentsToAdd = YMonotoneConverter.getSegmentsToMakeYMonotone(polygon);
     log.info("Adding {} lines to make it Y-monotone", segmentsToAdd.size());
     List<LineSegment> polygons = SegmentAdder.addLineSegments(segmentsToAdd);
-    log.info("Got {} distinct polygons", polygons.size());
-    List<LineSegment> convexPolygons = new ArrayList<>(polygons.size()); //We assume the order is CCW.
-    for (var polygonStartSegment : polygons) {
-      if(isConvex(polygonStartSegment)) {
-        convexPolygons.add(polygonStartSegment);
-      } else {
-        List<LineSegment> triangleSegments = TriangulationUtil.triangulateYMonotone(polygonStartSegment);
-        log.info("Created a triangulation of {} triangles", triangleSegments.size());
-        convexPolygons.addAll(triangleSegments);
-      }
-    }
-    log.info("Returning {} convex polygons", convexPolygons.size());
-    return convexPolygons;
+    log.info("Got {} polygons", polygons.size());
+    return List.of();
   }
 
   private static boolean isConvex(LineSegment segment) {

@@ -158,10 +158,7 @@ public class GeometryUtil {
       next = prev;
       prev = temp;
     }
-    assert prev.getNext() == next;
     return new PrevNext(prev, next);
   }
 
-  public record PrevNext(LineSegment prev, LineSegment next) {
-  }
 }

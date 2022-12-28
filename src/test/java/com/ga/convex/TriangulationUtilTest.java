@@ -16,7 +16,7 @@ class TriangulationUtilTest {
     List<LineSegment> segments = TriangulationUtil.triangulateYMonotone(polygon);
     System.out.println(segments);
     for (var segment: segments) {
-      assertEquals(segment.getNext().getNext(), segment);
+      assertEquals(segment.getNext().getNext().getNext(), segment);
     }
   }
 
@@ -49,6 +49,7 @@ class TriangulationUtilTest {
     five.setPrev(six);
     six.setPrev(seven);
     seven.setPrev(one);
+
     one.setNext(seven);
     two.setNext(one);
     three.setNext(two);

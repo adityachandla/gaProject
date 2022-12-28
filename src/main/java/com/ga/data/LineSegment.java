@@ -20,6 +20,8 @@ public class LineSegment {
   @ToString.Exclude
   private LineSegment sibling;
 
+  private int faceReferenceId;
+
   public LineSegment(Point start, Point end) {
     this.start = start;
     this.end = end;

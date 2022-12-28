@@ -16,12 +16,34 @@ public class TriangulationUtil {
 
   public static List<LineSegment> triangulateYMonotone(LineSegment startSegment) {
     var boundaryPoints = getBoundaryPointsSorted(startSegment);
-    var segmentsToAdd = getSegmentsToAdd(boundaryPoints);
-    return SegmentAdder.addLineSegments(segmentsToAdd);
+    var addedSegments = createTriangulation(boundaryPoints);
+    var distinctSegments = new ArrayList<LineSegment>();
+    var faceIdBefore = FaceReferenceGenerator.getCurrentReferenceId();
+    for (var segment : addedSegments) {
+      if (segment.getFaceReferenceId() > faceIdBefore) {
+        continue;
+      }
+      assignFaceId(segment);
+      distinctSegments.add(segment);
+    }
+    return distinctSegments;
   }
 
-  private static List<LineSegment> getSegmentsToAdd(List<BoundaryPoint> boundaryPoints) {
-    List<LineSegment> segmentsToAdd = new ArrayList<>(boundaryPoints.size());
+  private static void assignFaceId(LineSegment segment) {
+    var curr = segment;
+    int count = 0;
+    do {
+      curr.setFaceReferenceId(FaceReferenceGenerator.getAndIncrementReferenceId());
+      curr = curr.getNext();
+      count++;
+    } while(curr != segment);
+    if (count != 3) {
+      log.info("Something fucked up {}", count);
+    }
+  }
+
+  private static List<LineSegment> createTriangulation(List<BoundaryPoint> boundaryPoints) {
+    List<LineSegment> addedSegments = new ArrayList<>(boundaryPoints.size());
     var stack = new Stack<BoundaryPoint>();
     stack.add(boundaryPoints.get(0));
     stack.add(boundaryPoints.get(1));
@@ -34,7 +56,8 @@ public class TriangulationUtil {
         while (stack.size() > 1) {
           var toProcess = stack.pop();
           lastProcessed = toProcess;
-          segmentsToAdd.add(new LineSegment(v.point(), toProcess.point()));
+          var addedSegment = addSegment(v, toProcess);
+          addedSegments.add(addedSegment);
         }
         stack.pop();
         stack.push(lastProcessed);
@@ -46,7 +69,8 @@ public class TriangulationUtil {
         while (!stack.empty() && boundary.sameBoundary(stack.peek())) {
           var toProcess = stack.pop();
           prev = toProcess;
-          segmentsToAdd.add(new LineSegment(v.point(), toProcess.point()));
+          var addedSegment = addSegment(v, toProcess);
+          addedSegments.add(addedSegment);
         }
         stack.push(prev);
         stack.push(v);
@@ -56,9 +80,19 @@ public class TriangulationUtil {
     if (!stack.empty()) stack.pop();
     while (stack.size() > 1) {
       var toProcess = stack.pop();
-      segmentsToAdd.add(new LineSegment(last.point(), toProcess.point()));
+      var addedSegment = addSegment(last, toProcess);
+      addedSegments.add(addedSegment);
     }
-    return segmentsToAdd;
+    return addedSegments;
+  }
+
+  private static LineSegment addSegment(BoundaryPoint one, BoundaryPoint two) {
+    if (one.isLeftBoundary()) {
+      var temp = one;
+      one = two;
+      two = temp;
+    }
+    return SegmentAdder.createSegment(one.point(), two.point());
   }
 
   private static List<BoundaryPoint> getBoundaryPointsSorted(LineSegment startSegment) {
