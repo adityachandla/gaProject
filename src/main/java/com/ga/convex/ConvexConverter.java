@@ -1,12 +1,10 @@
 package com.ga.convex;
 
 import com.ga.data.LineSegment;
-import com.ga.data.Point;
 import com.ga.data.Polygon;
 import com.ga.util.GeometryUtil;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -17,6 +15,13 @@ public class ConvexConverter {
     log.info("Adding {} lines to make it Y-monotone", segmentsToAdd.size());
     List<LineSegment> polygons = SegmentAdder.addLineSegments(segmentsToAdd);
     log.info("Got {} polygons", polygons.size());
+    int counter = 0;
+    for (var p : polygons) {
+      if (isConvex(p)) {
+        counter++;
+      }
+    }
+    log.info("Got {} convex polygons", counter);
     return List.of();
   }
 

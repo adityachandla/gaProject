@@ -84,7 +84,7 @@ public class YMonotoneConverter {
     var leftEdge = prevNext.prev();
     var candidate = helper.get(leftEdge);
     if (GeometryUtil.getPointType(candidate) == GeometryUtil.PointType.MERGE) {
-      linesAdded.add(new LineSegment(candidate, point));
+      linesAdded.add(new LineSegment(point, candidate));
     }
     leftLines.remove(leftEdge);
     return linesAdded;
@@ -99,7 +99,7 @@ public class YMonotoneConverter {
       //Handle upper
       var upperHelper = helper.get(upperLower.upper());
       if (GeometryUtil.getPointType(upperHelper) == GeometryUtil.PointType.MERGE) {
-        linesAdded.add(new LineSegment(upperHelper, point));
+        linesAdded.add(new LineSegment(point, upperHelper));
       }
       leftLines.remove(upperLower.upper());
 
@@ -110,7 +110,7 @@ public class YMonotoneConverter {
       var leftLine = getSegmentToLeft(point, leftLines);
       var leftLineHelper = helper.get(leftLine);
       if (GeometryUtil.getPointType(leftLineHelper) == GeometryUtil.PointType.MERGE) {
-        linesAdded.add(new LineSegment(leftLineHelper, point));
+        linesAdded.add(new LineSegment(point, leftLineHelper));
       }
       helper.put(leftLine, point);
     }

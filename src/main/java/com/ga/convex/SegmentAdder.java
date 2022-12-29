@@ -2,72 +2,60 @@ package com.ga.convex;
 
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
-import com.ga.util.GeometryUtil;
 import com.ga.util.PrevNext;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.geometry.euclidean.twod.Ray;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Slf4j
 public class SegmentAdder {
   /**
    * This function updates the pointers to add segments and then loops over added
    * segments to deduplicate them.
-   * @param toAdd List of segments to add
+   *
+   * @param segments List of segments to add
    * @return List of starting segments for all polygons
    */
-  public static List<LineSegment> addLineSegments(List<LineSegment> toAdd) {
-    List<LineSegment> doubleSegments = getDoubleSegments(toAdd);
-    List<LineSegment> distinctPolygonSegments = new ArrayList<>();
-    Set<Point> seenPoints = new HashSet<>();
-    for (var segment : doubleSegments) {
-      distinctPolygonSegments.add(segment);
-      addFaceReferenceId(segment, seenPoints);
+  public static List<LineSegment> addLineSegments(List<LineSegment> segments) {
+    segments = segments.stream().map(s -> createSegment(s.getStart(), s.getEnd())).toList();
+    List<LineSegment> distinctSegments = new ArrayList<>();
+    for (var segment : segments) {
+      if (segment.getFaceReferenceId() == 0) {
+        addFaceReferenceId(segment);
+        distinctSegments.add(segment);
+      }
+      if (segment.getSibling().getFaceReferenceId() == 0) {
+        addFaceReferenceId(segment.getSibling());
+        distinctSegments.add(segment.getSibling());
+      }
     }
-    log.info("Total seen points {}", seenPoints.size());
-    return distinctPolygonSegments;
+    return distinctSegments;
   }
 
-  private static void addFaceReferenceId(LineSegment segment, Set<Point> seenPoints) {
+  private static void addFaceReferenceId(LineSegment segment) {
     var curr = segment;
+    int referenceId = FaceReferenceGenerator.getAndIncrementReferenceId();
     do {
-      seenPoints.add(segment.getStart());
-      seenPoints.add(segment.getEnd());
-      curr.setFaceReferenceId(FaceReferenceGenerator.getAndIncrementReferenceId());
+      curr.setFaceReferenceId(referenceId);
       curr = curr.getNext();
     } while (curr != segment);
   }
 
-  private static List<LineSegment> getDoubleSegments(List<LineSegment> segments) {
-    List<LineSegment> doubleSegments = new ArrayList<>();
-    for (var segment : segments) {
-      var startPoint = segment.getStart();
-      var endPoint = segment.getEnd();
-      var addedSegment = createSegment(startPoint, endPoint);
-      doubleSegments.add(addedSegment);
-      doubleSegments.add(addedSegment.getSibling());
-    }
-    return doubleSegments;
-  }
-
   public static LineSegment createSegment(Point start, Point end) {
+    assert start.getY() <= end.getY();
     var segmentOne = new LineSegment(start, end);
     var segmentTwo = new LineSegment(end, start);
-
-    //Reference to points
-    segmentOne.addReferenceToPoints();
-    segmentTwo.addReferenceToPoints();
 
     //Set siblings
     segmentTwo.setSibling(segmentOne);
     segmentOne.setSibling(segmentTwo);
 
-    var startSegments = GeometryUtil.getPrevNext(start);
-    var endSegments = GeometryUtil.getPrevNext(end);
+    var startSegments = SegmentAdderUtil.getPrevNextFromViewer3(start, end);
+    var endSegments = SegmentAdderUtil.getPrevNextFromViewer3(end, start);
+
+    segmentOne.addReferenceToPoints();
+    segmentTwo.addReferenceToPoints();
 
     //Add prev and next to new segments
     segmentOne.setPrev(startSegments.prev());
@@ -84,23 +72,15 @@ public class SegmentAdder {
     return segmentTwo;
   }
 
-  private static PrevNext getPrevNext(Point point) {
-    var prevNextPairs = getPrevNextPairs(point);
-    if (prevNextPairs.size() == 1) {
-      return prevNextPairs.get(0);
+  private static PrevNext getLatestPrevNext(Point p) {
+    var segments = p.getSegments();
+    var prev = segments.get(segments.size() - 1);
+    var next = segments.get(segments.size() - 2);
+    if (prev.getNext() != next) {
+      return new PrevNext(next, prev);
     }
-    return SegmentAdderUtil.getFirstPairClockwise(prevNextPairs, point);
+    return new PrevNext(prev, next);
   }
 
-  private static List<PrevNext> getPrevNextPairs(Point p) {
-    var pairs = new ArrayList<PrevNext>();
-    for (var one : p.getSegments()) {
-      for (var two : p.getSegments()) {
-        if (one.getNext() == two) {
-          pairs.add(new PrevNext(one, two));
-        }
-      }
-    }
-    return pairs;
-  }
+
 }

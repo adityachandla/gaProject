@@ -1,5 +1,7 @@
 package com.ga.util;
 
+import com.ga.data.Point;
+import org.apache.commons.geometry.euclidean.twod.Line;
 import org.apache.commons.geometry.euclidean.twod.Lines;
 import org.apache.commons.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.numbers.core.Precision;
@@ -19,6 +21,23 @@ public class GeometryTrial {
     System.out.println(precision.gte(lineOne.getDirection().getY(), 0)); //Gives true when Y >= 0
     System.out.println(lineTwo.getDirection().getX());
     System.out.println(lineTwo.getDirection().getY());
+  }
+
+  @Test
+  public void testAngleTwo() {
+    var a = Vector2D.of(52,57);
+    var ac = Lines.fromPoints(a, Vector2D.of(61,33), precision);
+    var ab = Lines.fromPoints(a, Vector2D.of(43,31), precision);
+    var ad = Lines.fromPoints(a, Vector2D.of(52,83), precision);
+    System.out.println(getAngle(ac,ab));
+    System.out.println(getAngle(ac,ad));
+  }
+
+
+  private double getAngle(Line one, Line two) {
+    double angle = one.angle(two);
+    if (angle < 0) return angle+(2*Math.PI);
+    return angle;
   }
 
   @Test
