@@ -2,6 +2,7 @@ package com.ga.convex;
 
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
+import com.ga.triangulation.TriangulationUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

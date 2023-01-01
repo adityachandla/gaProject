@@ -1,5 +1,8 @@
-package com.ga.convex;
+package com.ga.data;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class FaceReferenceGenerator {
   private static int referenceId = 0;
 

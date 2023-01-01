@@ -1,4 +1,4 @@
-package com.ga.convex;
+package com.ga.monotone;
 
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
@@ -153,6 +153,7 @@ public class YMonotoneConverter {
    * @return Line segment that is to the left
    */
   private static LineSegment getSegmentToLeft(Point p, TreeSet<LineSegment> segments) {
+    //TODO write a custom comparator so that .higher works in log(n)
     var descendingIterator = segments.descendingIterator();
     while (descendingIterator.hasNext()) {
       var segment = descendingIterator.next();

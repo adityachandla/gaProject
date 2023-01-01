@@ -94,10 +94,6 @@ public class GeometryUtil {
     throw new IllegalStateException("Invalid Direction change");
   }
 
-  public static DirectionX getDirectionChangeX(PrevNext prevNext) {
-    return getDirectionChangeX(prevNext.prev(), prevNext.next());
-  }
-
   public static DirectionX getDirectionChangeX(LineSegment prev, LineSegment next) {
     var prevSegment = Lines.fromPoints(toVector2D(prev.getStart()), toVector2D(prev.getEnd()), precision);
     var nextSegment = Lines.fromPoints(toVector2D(next.getStart()), toVector2D(next.getEnd()), precision);

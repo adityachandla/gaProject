@@ -14,13 +14,11 @@ public class PolygonCreationUtil {
 
   public static Polygon createPolygon(ProblemInstance problemInstance) {
     var outerBoundary = problemInstance.outerBoundary();
-    //Doubly connected edge list for polygon and holes
     var boundaryStartSegment = createBoundary(outerBoundary);
     var holes = problemInstance.holes().stream()
         .map(PolygonCreationUtil::createBoundary)
         .toList();
 
-    //List of all points
     var polygonPoints = problemInstance.holes().stream()
         .flatMap(List::stream)
         .collect(Collectors.toList());

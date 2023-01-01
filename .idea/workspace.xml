@@ -4,13 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Tried bugfixes for segment adder. Still doesn't work.">
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Line segment addition finally works.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/Boundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/BoundarySegment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdderUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdderUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/YMonotoneConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/FaceReferenceGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdderUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/TriangulationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/convex/TriangulationUtilTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/convex/TriangulationUtilTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +28,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -138,7 +145,7 @@
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.convex.*" />
+          <option name="PATTERN" value="com.ga.monotone.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -154,7 +161,7 @@
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.convex.*" />
+          <option name="PATTERN" value="com.ga.monotone.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -284,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672257651797</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Line segment addition finally works.">
+      <created>1672326866792</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1672326866792</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -312,7 +326,8 @@
     <MESSAGE value="Added convexity check on current polygons." />
     <MESSAGE value="Bug fixes for triangulation. Still doesn't work." />
     <MESSAGE value="Tried bugfixes for segment adder. Still doesn't work." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tried bugfixes for segment adder. Still doesn't work." />
+    <MESSAGE value="Line segment addition finally works." />
+    <option name="LAST_COMMIT_MESSAGE" value="Line segment addition finally works." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gaProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1671805950127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

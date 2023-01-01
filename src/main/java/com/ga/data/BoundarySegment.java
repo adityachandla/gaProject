@@ -1,7 +1,5 @@
-package com.ga.convex;
+package com.ga.data;
 
-import com.ga.data.BoundaryPoint;
-import com.ga.data.Point;
 import com.ga.util.GeometryUtil;
 import lombok.AllArgsConstructor;
 import org.apache.commons.geometry.euclidean.twod.Line;
@@ -10,7 +8,7 @@ import org.apache.commons.numbers.core.Precision;
 
 
 @AllArgsConstructor
-public class Boundary {
+public class BoundarySegment {
   private static final Precision.DoubleEquivalence precision = Precision.doubleEquivalenceOfEpsilon(1e-20);
   private BoundaryPoint source;
   private BoundaryPoint prev;

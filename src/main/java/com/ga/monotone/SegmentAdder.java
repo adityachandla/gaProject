@@ -1,8 +1,8 @@
-package com.ga.convex;
+package com.ga.monotone;
 
+import com.ga.data.FaceReferenceGenerator;
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
-import com.ga.util.PrevNext;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -51,8 +51,8 @@ public class SegmentAdder {
     segmentTwo.setSibling(segmentOne);
     segmentOne.setSibling(segmentTwo);
 
-    var startSegments = SegmentAdderUtil.getPrevNextFromViewer3(start, end);
-    var endSegments = SegmentAdderUtil.getPrevNextFromViewer3(end, start);
+    var startSegments = SegmentAdderUtil.getPrevNextFromViewer(start, end);
+    var endSegments = SegmentAdderUtil.getPrevNextFromViewer(end, start);
 
     segmentOne.addReferenceToPoints();
     segmentTwo.addReferenceToPoints();
@@ -71,16 +71,5 @@ public class SegmentAdder {
 
     return segmentTwo;
   }
-
-  private static PrevNext getLatestPrevNext(Point p) {
-    var segments = p.getSegments();
-    var prev = segments.get(segments.size() - 1);
-    var next = segments.get(segments.size() - 2);
-    if (prev.getNext() != next) {
-      return new PrevNext(next, prev);
-    }
-    return new PrevNext(prev, next);
-  }
-
 
 }
