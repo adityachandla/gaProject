@@ -27,6 +27,8 @@ public class SegmentAdderUtil {
    * @return The PrevNext pair that should be considered for @dest
    */
   public static PrevNext getPrevNextFromViewer(Point dest, Point viewer) {
+    boolean lookingLeft = isViewerLookingLeft(dest, viewer);
+    boolean lookingDown = isViewerLookingDown(dest, viewer);
     var prevNextPairs = getPrevNextPairs(dest);
     var lineForPrev = Lines.fromPoints(GeometryUtil.toVector2D(viewer), GeometryUtil.toVector2D(dest), precision);
     var lineForNext = Lines.fromPoints(GeometryUtil.toVector2D(dest), GeometryUtil.toVector2D(viewer), precision);
@@ -35,7 +37,7 @@ public class SegmentAdderUtil {
     for (var prevNext : prevNextPairs) {
       double total = 0;
       total += getAngleCounterClockwise(lineForPrev, getLine(prevNext.prev()));
-      total += getAngleCounterClockwise(getLine(prevNext.next()), lineForNext);
+      total += getAngleClockwise(lineForNext, getLine(prevNext.next()));
       if (total < minAngle) {
         minAngle = total;
         minPrevNext = prevNext;
@@ -44,8 +46,27 @@ public class SegmentAdderUtil {
     return minPrevNext;
   }
 
+  private static boolean isViewerLookingLeft(Point dest, Point viewer) {
+    if(viewer.getX() > dest.getX()) {
+      return true;
+    } else if (viewer.getX() < dest.getX()) {
+      return false;
+    }
+    //Looking down is looking left
+    return viewer.getY() > dest.getY() ? true : false;
+  }
+
+  private static boolean isViewerLookingDown(Point dest, Point viewer) {
+    if (dest.getY() < viewer.getY()) {
+      return true;
+    } else if (dest.getY() > viewer.getY()) {
+      return false;
+    }
+    return dest.getX() > viewer.getX() ? true : false;
+  }
+
   /**
-   * By how many radians do we need to rotate CCW one to get to two.
+   * By how many radians do we need to rotate one CCW to get to two.
    * @param one viewing line
    * @param two one of the next lines
    * @return radians
@@ -53,9 +74,17 @@ public class SegmentAdderUtil {
   private static double getAngleCounterClockwise(Line one, Line two) {
     var angle = one.angle(two);
     if(angle < 0) {
-      return angle + (2*Math.PI);
+      angle += (2*Math.PI);
     }
     return angle;
+  }
+
+  private static double getAngleClockwise(Line one, Line two) {
+    var angle = one.angle(two);
+    if (angle > 0) {
+      angle -= (2*Math.PI);
+    }
+    return Math.abs(angle);
   }
 
 

@@ -4,11 +4,13 @@ import com.ga.data.BoundaryPoint;
 import com.ga.data.BoundarySegment;
 import com.ga.data.LineSegment;
 import com.ga.monotone.SegmentAdder;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+@Slf4j
 public class TriangulationEdgeGenerator {
 
   private final List<BoundaryPoint> boundaryPoints;
@@ -25,7 +27,7 @@ public class TriangulationEdgeGenerator {
     stack.add(boundaryPoints.get(1));
   }
 
-  public List<LineSegment> createTriangulation() {
+  public List<LineSegment> getAddedEdges() {
     addedSegments = new ArrayList<>(boundaryPoints.size());
     initializeStack();
     for (int i = 2; i < boundaryPoints.size() - 1; i++) {
@@ -50,8 +52,7 @@ public class TriangulationEdgeGenerator {
     while (stack.size() > 1) {
       var toProcess = stack.pop();
       lastProcessed = toProcess;
-      var addedSegment = addSegment(p, toProcess);
-      addedSegments.add(addedSegment);
+      addSegment(p, toProcess);
     }
     stack.pop();
     stack.push(lastProcessed);
@@ -65,8 +66,7 @@ public class TriangulationEdgeGenerator {
     while (!stack.empty() && boundary.sameBoundary(stack.peek())) {
       var toProcess = stack.pop();
       prev = toProcess;
-      var addedSegment = addSegment(p, toProcess);
-      addedSegments.add(addedSegment);
+      addSegment(p, toProcess);
     }
     stack.push(prev);
     stack.push(p);
@@ -77,18 +77,12 @@ public class TriangulationEdgeGenerator {
     if (!stack.empty()) stack.pop();
     while (stack.size() > 1) {
       var toProcess = stack.pop();
-      var addedSegment = addSegment(last, toProcess);
-      addedSegments.add(addedSegment);
+      addSegment(last, toProcess);
     }
   }
 
 
-  private LineSegment addSegment(BoundaryPoint one, BoundaryPoint two) {
-    if (one.isLeftBoundary()) {
-      var temp = one;
-      one = two;
-      two = temp;
-    }
-    return SegmentAdder.createSegment(one.point(), two.point());
+  private void addSegment(BoundaryPoint one, BoundaryPoint two) {
+    addedSegments.add(SegmentAdder.createSegment(one.point(), two.point()));
   }
 }

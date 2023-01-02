@@ -4,20 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Line segment addition finally works.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" afterDir="false" />
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Code cleanup.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/Boundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/BoundarySegment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/FaceReferenceGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/SegmentAdderUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/TriangulationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonCreationUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/convex/TriangulationUtilTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/convex/TriangulationUtilTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +95,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/customInstances/mergeSplit.json" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ga.*" />
@@ -141,17 +138,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GeometryTrial.testClockwise" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GeometryTrial.testDirections" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.monotone.*" />
+          <option name="PATTERN" value="com.ga.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ga.util" />
       <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryTrial" />
-      <option name="METHOD_NAME" value="testClockwise" />
+      <option name="METHOD_NAME" value="testDirections" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -176,18 +173,18 @@
     <list>
       <item itemvalue="Application.Converter" />
       <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.GeometryTrial.testDirections" />
       <item itemvalue="JUnit.GeometryTrial.testAngleTwo" />
       <item itemvalue="JUnit.GeometryTrial.testAngle" />
-      <item itemvalue="JUnit.GeometryTrial.testClockwise" />
       <item itemvalue="JUnit.TriangulationUtilTest.testBoundary" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.GeometryTrial.testDirections" />
+        <item itemvalue="JUnit.TriangulationUtilTest.testBoundary" />
         <item itemvalue="JUnit.GeometryTrial.testAngleTwo" />
         <item itemvalue="JUnit.GeometryTrial.testAngle" />
-        <item itemvalue="JUnit.TriangulationUtilTest.testBoundary" />
-        <item itemvalue="JUnit.GeometryTrial.testClockwise" />
       </list>
     </recent_temporary>
   </component>
@@ -298,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672326866792</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Code cleanup.">
+      <created>1672582151058</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1672582151059</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -327,7 +331,8 @@
     <MESSAGE value="Bug fixes for triangulation. Still doesn't work." />
     <MESSAGE value="Tried bugfixes for segment adder. Still doesn't work." />
     <MESSAGE value="Line segment addition finally works." />
-    <option name="LAST_COMMIT_MESSAGE" value="Line segment addition finally works." />
+    <MESSAGE value="Code cleanup." />
+    <option name="LAST_COMMIT_MESSAGE" value="Code cleanup." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gaProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1671805950127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -4,6 +4,7 @@ import com.ga.data.LineSegment;
 import com.ga.data.Polygon;
 import com.ga.monotone.SegmentAdder;
 import com.ga.monotone.YMonotoneConverter;
+import com.ga.triangulation.TriangulationUtil;
 import com.ga.util.GeometryUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +24,7 @@ public class ConvexConverter {
       if (isConvex(p)) {
         convexPolygons.add(p);
       } else {
-//        convexPolygons.addAll(TriangulationUtil.triangulateYMonotone(p));
+        convexPolygons.addAll(TriangulationUtil.triangulateYMonotone(p));
       }
     }
     log.info("Got {} convex polygons", convexPolygons.size());

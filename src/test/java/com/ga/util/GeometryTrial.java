@@ -55,4 +55,14 @@ public class GeometryTrial {
     System.out.println(dirOne.angle(dirTwo));
     System.out.println(dirTwo.angle(dirThree));
   }
+
+  @Test
+  public void testDirections() {
+    var p1 = Vector2D.of(10, 10);
+    var p2 = Vector2D.of(10, 5);
+    var p3 = Vector2D.of(5, 10);
+    var l1 = Lines.fromPoints(p1, p2, precision);
+    var l2 = Lines.fromPoints(p1, p3, precision);
+    System.out.println(l1.angle(l2));
+  }
 }

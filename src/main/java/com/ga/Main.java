@@ -1,5 +1,6 @@
 package com.ga;
 
+import com.ga.data.FaceReferenceGenerator;
 import com.ga.io.Reader;
 import com.ga.convex.ConvexConverter;
 import com.ga.util.PolygonCreationUtil;
@@ -20,6 +21,7 @@ public class Main {
     var problemInstances = Reader.getProblemInstances(Path.of(args[0]));
     log.info("Total instances {}", problemInstances.size());
     for (var problemInstance : problemInstances) {
+      FaceReferenceGenerator.clear();
       log.info("Processing instance {} with {} boundary points and {} holes",
           problemInstance.name(),
           problemInstance.outerBoundary().size(),
