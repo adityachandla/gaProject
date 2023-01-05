@@ -25,13 +25,13 @@ public class BoundarySegment {
   private boolean isClockwise(Point p) {
     var prev = getLine(source.point(), this.prev.point());
     var next = getLine(source.point(), p);
-    return prev.angle(next) < 0;
+    return precision.lt(prev.angle(next), 0);
   }
 
   private boolean isAntiClockwise(Point p) {
     var prev = getLine(source.point(), this.prev.point());
     var next = getLine(source.point(), p);
-    return prev.angle(next) > 0;
+    return precision.gt(prev.angle(next), 0);
   }
 
   private Line getLine(Point one, Point two) {

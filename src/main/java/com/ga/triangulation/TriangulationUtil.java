@@ -10,13 +10,19 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.HashMap;
+import java.util.HashSet;
 
 @Slf4j
 public class TriangulationUtil {
 
   public static List<LineSegment> triangulateYMonotone(LineSegment startSegment) {
+    var prevNextMap = getPrevNextMap(startSegment);
     var boundaryPoints = getBoundaryPoints(startSegment);
-    var edgeGenerator = new TriangulationEdgeGenerator(boundaryPoints);
+    checkBoundaryPoints(boundaryPoints);
+    var edgeGenerator = new TriangulationEdgeGenerator(boundaryPoints, prevNextMap);
     //Verified that we are adding correct number of edges, and they are not repeated
     var addedSegments = edgeGenerator.getAddedEdges();
     var distinctSegments = new ArrayList<LineSegment>();
@@ -28,6 +34,27 @@ public class TriangulationUtil {
       }
     }
     return distinctSegments;
+  }
+
+  private static void checkBoundaryPoints(List<BoundaryPoint> boundaryPoints) {
+    Set<Point> seen = new HashSet<>();
+    for (var boundaryPoint : boundaryPoints) {
+      if (seen.contains(boundaryPoint.point())) {
+        log.info("Got duplicate boundary point in boundary");
+      }
+      seen.add(boundaryPoint.point());
+    }
+  }
+
+  private static Map<Point, PrevNext> getPrevNextMap(LineSegment start) {
+    var prevNexts = new HashMap<Point, PrevNext>();
+    prevNexts.put(start.getStart(), new PrevNext(start.getPrev(), start));
+    var curr = start;
+    do {
+      prevNexts.put(curr.getEnd(), new PrevNext(curr, curr.getNext()));
+      curr = curr.getNext();
+    } while (curr != start);
+    return prevNexts;
   }
 
   private static void assignFaceId(LineSegment segment) {
@@ -44,16 +71,16 @@ public class TriangulationUtil {
     var bottomPoint = getBottomPoint(startSegment);
     List<BoundaryPoint> leftBoundary = new ArrayList<>();
     var start = topPoint.prevNext().next();
-    while(start != bottomPoint.prevNext().prev()) {
+    do {
       leftBoundary.add(BoundaryPoint.left(start.getStart()));
       start = start.getNext();
-    }
+    } while(start != bottomPoint.prevNext().next());
     List<BoundaryPoint> rightBoundary = new ArrayList<>();
     start = topPoint.prevNext().prev();
-    while (start != bottomPoint.prevNext.prev()) {
-      rightBoundary.add(BoundaryPoint.right(start.getEnd()));
+    do {
+      rightBoundary.add(BoundaryPoint.right(start.getStart()));
       start = start.getPrev();
-    }
+    } while (start != bottomPoint.prevNext.prev());
     return merge(leftBoundary, rightBoundary);
   }
 
@@ -67,7 +94,7 @@ public class TriangulationUtil {
         top = p;
         next = curr;
       }
-      top = p.getY() > top.getY() ? p : top;
+      curr = curr.getNext();
     } while(curr != start);
     return new PointPrevNext(top, new PrevNext(next.getPrev(), next));
   }
@@ -82,6 +109,7 @@ public class TriangulationUtil {
         top = p;
         next = curr;
       }
+      curr = curr.getNext();
     } while(curr != start);
     return new PointPrevNext(top, new PrevNext(next.getPrev(), next));
   }

@@ -1,6 +1,8 @@
 package com.ga.triangulation;
 
 import com.ga.data.BoundaryPoint;
+import com.ga.data.Point;
+import com.ga.util.PrevNext;
 import com.ga.data.BoundarySegment;
 import com.ga.data.LineSegment;
 import com.ga.monotone.SegmentAdder;
@@ -9,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.Map;
 
 @Slf4j
 public class TriangulationEdgeGenerator {
@@ -16,9 +19,11 @@ public class TriangulationEdgeGenerator {
   private final List<BoundaryPoint> boundaryPoints;
   private Stack<BoundaryPoint> stack;
   private List<LineSegment> addedSegments;
+  private Map<Point, PrevNext> prevNextMap;
 
-  public TriangulationEdgeGenerator(List<BoundaryPoint> boundaryPoints) {
+  public TriangulationEdgeGenerator(List<BoundaryPoint> boundaryPoints, Map<Point, PrevNext> prevNextMap) {
     this.boundaryPoints = boundaryPoints;
+    this.prevNextMap = prevNextMap;
   }
 
   private void initializeStack() {
@@ -81,8 +86,68 @@ public class TriangulationEdgeGenerator {
     }
   }
 
-
   private void addSegment(BoundaryPoint one, BoundaryPoint two) {
-    addedSegments.add(SegmentAdder.createSegment(one.point(), two.point()));
+    PrevNext prevNextOne = prevNextMap.get(one.point());
+    PrevNext prevNextTwo = prevNextMap.get(two.point());
+    var createdSegment = SegmentAdder.createSegment(prevNextOne, prevNextTwo);
+    addedSegments.add(createdSegment);
+    if (one.isLeftBoundary() && two.isLeftBoundary()) {
+      //If both on the left boundary, we need the edge from top to bottom
+      addFromTopToBottom(one, two, createdSegment);
+    } else if (!one.isLeftBoundary() && !two.isLeftBoundary()) {
+      //If both on right boundary, we need the edge from bottom to top
+      addFromBottomToTop(one, two, createdSegment);
+    } else {
+      //If the points are on different boundaries, we need the edge from right boundary to left
+      addFromRightToLeft(one, two, createdSegment);
+    }
   }
+
+  private void addFromTopToBottom(BoundaryPoint top, BoundaryPoint bottom, LineSegment createdSegment) {
+    if (top.point().getY() < bottom.point().getY()) {
+      var temp = top;
+      top = bottom;
+      bottom = temp;
+    }
+    LineSegment visibleSegment = createdSegment.getStart().equals(top.point()) ? createdSegment : createdSegment.getSibling();
+    var topPrevNext = prevNextMap.get(top.point());
+    var bottomPrevNext = prevNextMap.get(bottom.point());
+    prevNextMap.put(top.point(), new PrevNext(topPrevNext.prev(), visibleSegment));
+    prevNextMap.put(bottom.point(), new PrevNext(visibleSegment, bottomPrevNext.next()));
+  }
+
+  private void addFromBottomToTop(BoundaryPoint top, BoundaryPoint bottom, LineSegment createdSegment) {
+    if (top.point().getY() < bottom.point().getY()) {
+      var temp = top;
+      top = bottom;
+      bottom = temp;
+    }
+    LineSegment visibleSegment = createdSegment.getStart().equals(bottom.point()) ? createdSegment : createdSegment.getSibling();
+    var topPrevNext = prevNextMap.get(top.point());
+    var bottomPrevNext = prevNextMap.get(bottom.point());
+    prevNextMap.put(top.point(), new PrevNext(visibleSegment, topPrevNext.next()));
+    prevNextMap.put(bottom.point(), new PrevNext(bottomPrevNext.prev(), visibleSegment));
+  }
+
+  private void addFromRightToLeft(BoundaryPoint right, BoundaryPoint left, LineSegment createdSegment) {
+    if (right.isLeftBoundary()) {
+      var temp = right;
+      right = left;
+      left = temp;
+    }
+    LineSegment visibleSegment = createdSegment.getStart().equals(right.point()) ? createdSegment : createdSegment.getSibling();
+    var rightPrevNext = prevNextMap.get(right.point());
+    var leftPrevNext = prevNextMap.get(left.point());
+    prevNextMap.put(right.point(), new PrevNext(rightPrevNext.prev(), visibleSegment));
+    prevNextMap.put(left.point(), new PrevNext(visibleSegment, leftPrevNext.next()));
+  }
+
+  /**
+   * Returns true if p is above q
+   */
+  private static boolean isAbove(BoundaryPoint p, BoundaryPoint q) {
+    return p.point().getY() > q.point().getY() || 
+      (p.point().getY() == q.point().getY() && p.point().getX() < q.point().getX());
+  }
+
 }

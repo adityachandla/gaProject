@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Code cleanup.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" afterDir="false" />
-    </list>
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Code cleanup." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
