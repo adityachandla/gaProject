@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 instances/
+instances-2IMA15-output/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

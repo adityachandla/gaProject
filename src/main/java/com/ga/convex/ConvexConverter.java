@@ -25,28 +25,15 @@ public class ConvexConverter {
     Checker.checkYMonotone(polygon, polygons);
     List<LineSegment> convexPolygons = new ArrayList<>();
     for (var p : polygons) {
-      if (isConvex(p)) {
+      if (GeometryUtil.isConvex(p)) {
         convexPolygons.add(p);
       } else {
-        convexPolygons.addAll(TriangulationUtil.triangulateYMonotone(p));
+        var earClipper = new EarClipConvexConverter();
+        convexPolygons.addAll(earClipper.convertToConvexPolygons(p));
       }
     }
     log.info("Got {} convex polygons", convexPolygons.size());
     return convexPolygons;
-  }
-
-  private static boolean isConvex(LineSegment segment) {
-    var curr = segment;
-    do {
-      var start = curr.getStart();
-      var end = curr.getEnd();
-      var nextPoint = curr.getNext().getEnd();
-      if (GeometryUtil.orientationTest(start, end, nextPoint) == GeometryUtil.OrientationResult.RIGHT) {
-        return false;
-      }
-      curr = curr.getNext();
-    } while (curr != segment);
-    return true;
   }
 }
 

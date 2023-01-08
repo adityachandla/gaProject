@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Code cleanup." />
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Code cleanup.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/EarClipConvexConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemOutput.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Writer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instances-2IMA15/ccheese4390.instance.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/instances-2IMA15/fpg-poly_0000004900_h2.instance.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/instances-2IMA15/maze_4344_250_001_01.instance.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/instances-2IMA15/srpg_iso_aligned_mc0001336.instance.json" beforeDir="false" afterPath="$PROJECT_DIR$/instances-2IMA15-failing/srpg_iso_aligned_mc0001336.instance.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/BoundarySegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/BoundarySegment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,11 +68,11 @@
       <recent name="com.ga.data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/instances-2IMA15-failing" />
       <recent name="$PROJECT_DIR$/instances-2IMA15" />
       <recent name="$PROJECT_DIR$/customInstances" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/src/main/resources/" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -84,45 +103,13 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/customInstances/mergeSplit.json" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15 $PROJECT_DIR$/instances-2IMA15-output" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ga.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GeometryTrial.testAngle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gaProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ga.util" />
-      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryTrial" />
-      <option name="METHOD_NAME" value="testAngle" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GeometryTrial.testAngleTwo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="gaProject" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ga.util" />
-      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryTrial" />
-      <option name="METHOD_NAME" value="testAngleTwo" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -143,17 +130,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TriangulationUtilTest.testBoundary" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GeometryTrial.testReflexivity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.monotone.*" />
+          <option name="PATTERN" value="com.ga.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ga.convex" />
-      <option name="MAIN_CLASS_NAME" value="com.ga.convex.TriangulationUtilTest" />
-      <option name="METHOD_NAME" value="testBoundary" />
+      <option name="PACKAGE_NAME" value="com.ga.util" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryTrial" />
+      <option name="METHOD_NAME" value="testReflexivity" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeometryTrial.testReflexivityNegative" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gaProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ga.util" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryTrial" />
+      <option name="METHOD_NAME" value="testReflexivityNegative" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeometryTrial.testReflexivityPositive" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gaProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ga.util" />
+      <option name="MAIN_CLASS_NAME" value="com.ga.util.GeometryTrial" />
+      <option name="METHOD_NAME" value="testReflexivityPositive" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -162,18 +181,18 @@
     <list>
       <item itemvalue="Application.Converter" />
       <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.GeometryTrial.testReflexivity" />
+      <item itemvalue="JUnit.GeometryTrial.testReflexivityNegative" />
+      <item itemvalue="JUnit.GeometryTrial.testReflexivityPositive" />
       <item itemvalue="JUnit.GeometryTrial.testDirections" />
-      <item itemvalue="JUnit.GeometryTrial.testAngleTwo" />
-      <item itemvalue="JUnit.GeometryTrial.testAngle" />
-      <item itemvalue="JUnit.TriangulationUtilTest.testBoundary" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.GeometryTrial.testReflexivityPositive" />
+        <item itemvalue="JUnit.GeometryTrial.testReflexivityNegative" />
+        <item itemvalue="JUnit.GeometryTrial.testReflexivity" />
         <item itemvalue="JUnit.GeometryTrial.testDirections" />
-        <item itemvalue="JUnit.TriangulationUtilTest.testBoundary" />
-        <item itemvalue="JUnit.GeometryTrial.testAngleTwo" />
-        <item itemvalue="JUnit.GeometryTrial.testAngle" />
       </list>
     </recent_temporary>
   </component>

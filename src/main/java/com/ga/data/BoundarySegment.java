@@ -13,13 +13,13 @@ public class BoundarySegment {
   private BoundaryPoint source;
   private BoundaryPoint prev;
 
-  public boolean sameBoundary(BoundaryPoint next) {
-    boolean same = (source.isLeftBoundary() && isClockwise(next.point())) ||
+  public boolean isVisible(BoundaryPoint next) {
+    boolean visible = (source.isLeftBoundary() && isClockwise(next.point())) ||
         (!source.isLeftBoundary() && isAntiClockwise(next.point()));
-    if (same) {
+    if (visible) {
       prev = next;
     }
-    return same;
+    return visible;
   }
 
   private boolean isClockwise(Point p) {

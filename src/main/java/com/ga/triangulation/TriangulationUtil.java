@@ -60,10 +60,15 @@ public class TriangulationUtil {
   private static void assignFaceId(LineSegment segment) {
     var curr = segment;
     int referenceId = FaceReferenceGenerator.getAndIncrementReferenceId();
+    int count = 0;
     do {
       curr.setFaceReferenceId(referenceId);
       curr = curr.getNext();
+      count++;
     } while (curr != segment);
+    if (count != 3) {
+      log.warn("The count is {}", count);
+    }
   }
 
   private static List<BoundaryPoint> getBoundaryPoints(LineSegment startSegment) {

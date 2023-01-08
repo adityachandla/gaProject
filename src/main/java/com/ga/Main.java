@@ -3,6 +3,7 @@ package com.ga;
 import com.ga.data.FaceReferenceGenerator;
 import com.ga.io.Reader;
 import com.ga.convex.ConvexConverter;
+import com.ga.io.Writer;
 import com.ga.util.PolygonCreationUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,8 +14,8 @@ import java.util.Arrays;
 public class Main {
 
   public static void main(String[] args) {
-    if (args.length == 0) {
-      System.out.println("Provide path to instances");
+    if (args.length < 2) {
+      System.out.println("Provide path to instances and path for output");
       System.exit(1);
     }
     log.info("Got arguments: {}", Arrays.toString(args));
@@ -28,7 +29,8 @@ public class Main {
           problemInstance.holes().size());
       var polygon = PolygonCreationUtil.createPolygon(problemInstance);
       log.info("Created polygon with total points {}", polygon.getPoints().size());
-      ConvexConverter.convertToConvexPolygons(polygon);
+      var convexPolygons = ConvexConverter.convertToConvexPolygons(polygon);
+      Writer.writeSolution(args[1], problemInstance.name(), convexPolygons);
     }
   }
 

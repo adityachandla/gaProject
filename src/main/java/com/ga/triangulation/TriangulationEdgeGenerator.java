@@ -53,14 +53,19 @@ public class TriangulationEdgeGenerator {
   }
 
   private void processDifferentBoundaries(BoundaryPoint p) {
-    BoundaryPoint lastProcessed = null;
+    //In order to maintain prev-next, we should always add an
+    //edge that clips away a triangle. That is why we are adding
+    //segments in the reverse order here.
+    var toAdd = new ArrayList<BoundaryPoint>();
     while (stack.size() > 1) {
       var toProcess = stack.pop();
-      lastProcessed = toProcess;
-      addSegment(p, toProcess);
+      toAdd.add(toProcess);
+    }
+    for(int i = toAdd.size()-1; i >= 0; i--) {
+      addSegment(p, toAdd.get(i));
     }
     stack.pop();
-    stack.push(lastProcessed);
+    stack.push(toAdd.get(0));
     stack.push(p);
   }
 
@@ -68,7 +73,7 @@ public class TriangulationEdgeGenerator {
     var popped = stack.pop();
     var prev = popped;
     var boundary = new BoundarySegment(p, popped);
-    while (!stack.empty() && boundary.sameBoundary(stack.peek())) {
+    while (!stack.empty() && boundary.isVisible(stack.peek())) {
       var toProcess = stack.pop();
       prev = toProcess;
       addSegment(p, toProcess);
@@ -141,13 +146,4 @@ public class TriangulationEdgeGenerator {
     prevNextMap.put(right.point(), new PrevNext(rightPrevNext.prev(), visibleSegment));
     prevNextMap.put(left.point(), new PrevNext(visibleSegment, leftPrevNext.next()));
   }
-
-  /**
-   * Returns true if p is above q
-   */
-  private static boolean isAbove(BoundaryPoint p, BoundaryPoint q) {
-    return p.point().getY() > q.point().getY() || 
-      (p.point().getY() == q.point().getY() && p.point().getX() < q.point().getX());
-  }
-
 }

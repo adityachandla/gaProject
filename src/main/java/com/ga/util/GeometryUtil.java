@@ -157,4 +157,22 @@ public class GeometryUtil {
     return new PrevNext(prev, next);
   }
 
+  public static boolean isConvex(LineSegment segment) {
+    var curr = segment;
+    do {
+      var start = curr.getStart();
+      var end = curr.getEnd();
+      var nextPoint = curr.getNext().getEnd();
+      if (orientationTest(start, end, nextPoint) == OrientationResult.RIGHT) {
+        return false;
+      }
+      curr = curr.getNext();
+    } while (curr != segment);
+    return true;
+  }
+
+  public static boolean isReflexVertex(LineSegment prev, LineSegment next) {
+    return orientationTest(prev.getStart(),prev.getEnd(),next.getEnd()) == OrientationResult.RIGHT;
+  }
+
 }

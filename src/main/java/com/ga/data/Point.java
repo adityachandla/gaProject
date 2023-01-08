@@ -1,5 +1,6 @@
 package com.ga.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -21,9 +22,11 @@ public class Point {
   private long x, y;
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
+  @JsonIgnore
   private List<LineSegment> segments = new ArrayList<>();
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
+  @JsonIgnore
   private boolean isHole = false;
 
   public Point(long x, long y) {

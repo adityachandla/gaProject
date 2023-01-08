@@ -7,6 +7,8 @@ import org.apache.commons.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.numbers.core.Precision;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class GeometryTrial {
 
   private static final Precision.DoubleEquivalence precision = Precision.doubleEquivalenceOfEpsilon(1e-10);
@@ -64,5 +66,25 @@ public class GeometryTrial {
     var l1 = Lines.fromPoints(p1, p2, precision);
     var l2 = Lines.fromPoints(p1, p3, precision);
     System.out.println(l1.angle(l2));
+  }
+
+  @Test
+  public void testReflexivityNegative() {
+    var l1 = Lines.fromPoints(Vector2D.of(2,2), Vector2D.of(1,1), precision);
+    var l2 = Lines.fromPoints(Vector2D.of(1,1),Vector2D.of(2,0), precision);
+    assertTrue(precision.lt(l1.angle(l2), Math.PI));
+    var l3 = Lines.fromPoints(Vector2D.of(2,0), Vector2D.of(3,1), precision);
+    var l4 = Lines.fromPoints(Vector2D.of(3,1),Vector2D.of(2,2), precision);
+    assertTrue(precision.lt(l3.angle(l4), Math.PI));
+  }
+
+  @Test
+  public void testReflexivityPositive() {
+    var l1 = Lines.fromPoints(Vector2D.of(2,0), Vector2D.of(1,1), precision);
+    var l2 = Lines.fromPoints(Vector2D.of(1,1), Vector2D.of(2,2), precision);
+    assertTrue(precision.lt(l1.angle(l2), 0));
+    var l3 = Lines.fromPoints(Vector2D.of(2,2),Vector2D.of(3,1), precision);
+    var l4 = Lines.fromPoints(Vector2D.of(3,1),Vector2D.of(2,0), precision);
+    assertTrue(precision.lt(l3.angle(l4), 0));
   }
 }
