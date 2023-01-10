@@ -2,6 +2,7 @@ package com.ga.util;
 
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
+import com.ga.data.PrevNext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.geometry.euclidean.twod.Line;
 import org.apache.commons.geometry.euclidean.twod.Lines;
@@ -22,10 +23,6 @@ public class GeometryUtil {
 
   private enum DirectionChangeY {
     NONE, UP_TO_DOWN, DOWN_TO_UP
-  }
-
-  public enum DirectionX {
-    LEFT, RIGHT, LEFT_TO_RIGHT, RIGHT_TO_LEFT
   }
 
   /**
@@ -94,36 +91,8 @@ public class GeometryUtil {
     throw new IllegalStateException("Invalid Direction change");
   }
 
-  public static DirectionX getDirectionChangeX(LineSegment prev, LineSegment next) {
-    var prevSegment = Lines.fromPoints(toVector2D(prev.getStart()), toVector2D(prev.getEnd()), precision);
-    var nextSegment = Lines.fromPoints(toVector2D(next.getStart()), toVector2D(next.getEnd()), precision);
-
-    if (goingRight(prevSegment) && goingRight(nextSegment)) {
-      return DirectionX.RIGHT;
-    } else if (goingLeft(prevSegment) && goingLeft(nextSegment)) {
-      return DirectionX.LEFT;
-    } else if (goingLeft(prevSegment) && goingRight(nextSegment)) {
-      return DirectionX.LEFT_TO_RIGHT;
-    } else if (goingRight(prevSegment) && goingLeft(nextSegment)) {
-      return DirectionX.RIGHT_TO_LEFT;
-    } else if (straightX(prevSegment) && goingRight(nextSegment)) {
-      return goingUp(prevSegment) ? DirectionX.RIGHT : DirectionX.LEFT_TO_RIGHT;
-    } else if (straightX(prevSegment) && goingLeft(nextSegment)) {
-      return goingUp(prevSegment) ? DirectionX.RIGHT_TO_LEFT : DirectionX.LEFT;
-    } else if (goingLeft(prevSegment) && straightX(nextSegment)) {
-      return goingUp(nextSegment) ? DirectionX.LEFT_TO_RIGHT : DirectionX.LEFT;
-    } else if (goingRight(prevSegment) && straightX(nextSegment)) {
-      return goingUp(nextSegment) ? DirectionX.RIGHT : DirectionX.RIGHT_TO_LEFT;
-    }
-    throw new IllegalStateException("Invalid direction change X");
-  }
-
   private static boolean goingLeft(Line line) {
     return precision.lt(line.getDirection().getX(), 0);
-  }
-
-  private static boolean goingRight(Line line) {
-    return precision.gt(line.getDirection().getX(), 0);
   }
 
   private static boolean goingUp(Line line) {
@@ -136,10 +105,6 @@ public class GeometryUtil {
 
   private static boolean straightY(Line line) {
     return precision.eq(line.getDirection().getY(), 0);
-  }
-
-  private static boolean straightX(Line line) {
-    return precision.eq(line.getDirection().getX(), 0);
   }
 
   public static Vector2D toVector2D(Point p) {
@@ -172,7 +137,7 @@ public class GeometryUtil {
   }
 
   public static boolean isReflexVertex(LineSegment prev, LineSegment next) {
-    return orientationTest(prev.getStart(),prev.getEnd(),next.getEnd()) == OrientationResult.RIGHT;
+    return orientationTest(prev.getStart(), prev.getEnd(), next.getEnd()) == OrientationResult.RIGHT;
   }
 
 }

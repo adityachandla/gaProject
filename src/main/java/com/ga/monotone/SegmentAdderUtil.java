@@ -3,7 +3,7 @@ package com.ga.monotone;
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
 import com.ga.util.GeometryUtil;
-import com.ga.util.PrevNext;
+import com.ga.data.PrevNext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.geometry.euclidean.twod.Line;
 import org.apache.commons.geometry.euclidean.twod.Lines;
@@ -27,8 +27,6 @@ public class SegmentAdderUtil {
    * @return The PrevNext pair that should be considered for @dest
    */
   public static PrevNext getPrevNextFromViewer(Point dest, Point viewer) {
-    boolean lookingLeft = isViewerLookingLeft(dest, viewer);
-    boolean lookingDown = isViewerLookingDown(dest, viewer);
     var prevNextPairs = getPrevNextPairs(dest);
     var lineForPrev = Lines.fromPoints(GeometryUtil.toVector2D(viewer), GeometryUtil.toVector2D(dest), precision);
     var lineForNext = Lines.fromPoints(GeometryUtil.toVector2D(dest), GeometryUtil.toVector2D(viewer), precision);
@@ -44,25 +42,6 @@ public class SegmentAdderUtil {
       }
     }
     return minPrevNext;
-  }
-
-  private static boolean isViewerLookingLeft(Point dest, Point viewer) {
-    if(viewer.getX() > dest.getX()) {
-      return true;
-    } else if (viewer.getX() < dest.getX()) {
-      return false;
-    }
-    //Looking down is looking left
-    return viewer.getY() > dest.getY() ? true : false;
-  }
-
-  private static boolean isViewerLookingDown(Point dest, Point viewer) {
-    if (dest.getY() < viewer.getY()) {
-      return true;
-    } else if (dest.getY() > viewer.getY()) {
-      return false;
-    }
-    return dest.getX() > viewer.getX() ? true : false;
   }
 
   /**

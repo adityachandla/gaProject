@@ -10,119 +10,113 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeSet;
 
 @Slf4j
 public class YMonotoneConverter {
 
-  public static List<LineSegment> getSegmentsToMakeYMonotone(Polygon polygon) {
+  private final TreeSet<LineSegment> leftLines;
+  private final Map<LineSegment, Point> helper = new HashMap<>();
+  private final List<LineSegment> lineSegmentsToAdd = new ArrayList<>();
+  private final List<Point> polygonPoints;
+
+  public YMonotoneConverter(Polygon polygon) {
     //Going from top to bottom and left to right
     var comparator = Comparator.comparingLong(Point::getY)
         .reversed()
         .thenComparingLong(Point::getX);
     polygon.getPoints().sort(comparator);
 
-    //Sort lines on the basis of x coordinate of starting point
-    var leftLines = new TreeSet<LineSegment>(Comparator.comparingLong(line -> line.getStart().getX()));
-    var helper = new HashMap<LineSegment, Point>();
+    polygonPoints = polygon.getPoints();
+    leftLines = new TreeSet<>(Comparator.comparingLong(line -> line.getStart().getX()));
+  }
 
-    var lineSegmentsToAdd = new ArrayList<LineSegment>();
-    for (var point : polygon.getPoints()) {
-      var pointType = GeometryUtil.getPointType(point);
-      switch (pointType) {
-        case SPLIT -> lineSegmentsToAdd.add(handleSplit(point, leftLines, helper));
-        case MERGE -> lineSegmentsToAdd.addAll(handleMerge(point, leftLines, helper));
-        case START -> handleStart(point, leftLines, helper);
-        case END -> lineSegmentsToAdd.addAll(handleEnd(point, leftLines, helper));
-        case REGULAR -> lineSegmentsToAdd.addAll(handleRegular(point, leftLines, helper));
+  public List<LineSegment> getSegmentsToMakeYMonotone() {
+    for (var point : polygonPoints) {
+      switch (GeometryUtil.getPointType(point)) {
+        case SPLIT -> handleSplit(point);
+        case MERGE -> handleMerge(point);
+        case START -> handleStart(point);
+        case END -> handleEnd(point);
+        case REGULAR -> handleRegular(point);
       }
     }
     return lineSegmentsToAdd;
   }
 
-  private static LineSegment handleSplit(Point point, TreeSet<LineSegment> leftLines, HashMap<LineSegment, Point> helper) {
-    var lineToLeft = getSegmentToLeft(point, leftLines);
+  private void handleSplit(Point point) {
+    var lineToLeft = getSegmentToLeft(point);
     var segmentCreated = new LineSegment(point, helper.get(lineToLeft));
+    lineSegmentsToAdd.add(segmentCreated);
     helper.put(lineToLeft, point);
 
     var rightEdge = GeometryUtil.getPrevNext(point).next();
     leftLines.add(rightEdge);
     helper.put(rightEdge, point);
-    return segmentCreated;
   }
 
-  private static List<LineSegment> handleMerge(Point point,
-                                               TreeSet<LineSegment> leftLines,
-                                               HashMap<LineSegment, Point> helper) {
-    var linesAdded = new ArrayList<LineSegment>(2);
+  private void handleMerge(Point point) {
     var rightEdge = GeometryUtil.getPrevNext(point).prev();
     var rightCandidate = helper.get(rightEdge);
     if (GeometryUtil.getPointType(rightCandidate) == GeometryUtil.PointType.MERGE) {
-      linesAdded.add(new LineSegment(point, rightCandidate));
+      lineSegmentsToAdd.add(new LineSegment(point, rightCandidate));
     }
     leftLines.remove(rightEdge);
 
-    var lineToLeft = getSegmentToLeft(point, leftLines);
+    var lineToLeft = getSegmentToLeft(point);
     var leftCandidate = helper.get(lineToLeft);
     if (GeometryUtil.getPointType(leftCandidate) == GeometryUtil.PointType.MERGE) {
-      linesAdded.add(new LineSegment(point, leftCandidate));
+      lineSegmentsToAdd.add(new LineSegment(point, leftCandidate));
     }
     helper.put(lineToLeft, point);
-    return linesAdded;
   }
 
-  private static void handleStart(Point point, TreeSet<LineSegment> leftLines, HashMap<LineSegment, Point> helper) {
+  private void handleStart(Point point) {
     var prevNext = GeometryUtil.getPrevNext(point);
     var leftEdge = prevNext.next();
     leftLines.add(leftEdge);
     helper.put(leftEdge, point);
   }
 
-  private static List<LineSegment> handleEnd(Point point, TreeSet<LineSegment> leftLines, HashMap<LineSegment, Point> helper) {
-    var linesAdded = new ArrayList<LineSegment>(1);
+  private void handleEnd(Point point) {
     var prevNext = GeometryUtil.getPrevNext(point);
     var leftEdge = prevNext.prev();
     var candidate = helper.get(leftEdge);
     if (GeometryUtil.getPointType(candidate) == GeometryUtil.PointType.MERGE) {
-      linesAdded.add(new LineSegment(point, candidate));
+      lineSegmentsToAdd.add(new LineSegment(point, candidate));
     }
     leftLines.remove(leftEdge);
-    return linesAdded;
   }
 
-  private static List<LineSegment> handleRegular(Point point,
-                                                 TreeSet<LineSegment> leftLines,
-                                                 HashMap<LineSegment, Point> helper) {
-    var linesAdded = new ArrayList<LineSegment>(1);
+  private void handleRegular(Point point) {
     if (canJoinToRight(point)) {
-      var upperLower = getUpperLowerForRegular(point);
+      var prevNext = GeometryUtil.getPrevNext(point);
+      var upper = prevNext.prev();
+      var lower = prevNext.next();
       //Handle upper
-      var upperHelper = helper.get(upperLower.upper());
+      var upperHelper = helper.get(upper);
       if (GeometryUtil.getPointType(upperHelper) == GeometryUtil.PointType.MERGE) {
-        linesAdded.add(new LineSegment(point, upperHelper));
+        lineSegmentsToAdd.add(new LineSegment(point, upperHelper));
       }
-      leftLines.remove(upperLower.upper());
+      leftLines.remove(upper);
 
       //Handle lower
-      leftLines.add(upperLower.lower());
-      helper.put(upperLower.lower(), point);
+      leftLines.add(lower);
+      helper.put(lower, point);
     } else {
-      var leftLine = getSegmentToLeft(point, leftLines);
+      var leftLine = getSegmentToLeft(point);
       var leftLineHelper = helper.get(leftLine);
       if (GeometryUtil.getPointType(leftLineHelper) == GeometryUtil.PointType.MERGE) {
-        linesAdded.add(new LineSegment(point, leftLineHelper));
+        lineSegmentsToAdd.add(new LineSegment(point, leftLineHelper));
       }
       helper.put(leftLine, point);
     }
-    return linesAdded;
   }
 
   /**
-   * In a hole if we are going up within a hole then polygon is to the right
-   * If we are going down in the outer boundary then the polygon is to the right
-   *
    * @param point A point of polygon or hole
-   * @return is the polygon to the right
+   * @return boolean is the polygon to the right
    */
   private static boolean canJoinToRight(Point point) {
     var prevNext = GeometryUtil.getPrevNext(point);
@@ -148,13 +142,11 @@ public class YMonotoneConverter {
    * always a point to the left although the line may be to the left. This is a
    * hack to take care of the edge case.
    *
-   * @param p        Point
-   * @param segments Tree of line segments
+   * @param p Point
    * @return Line segment that is to the left
    */
-  private static LineSegment getSegmentToLeft(Point p, TreeSet<LineSegment> segments) {
-    //TODO write a custom comparator so that .higher works in log(n)
-    var descendingIterator = segments.descendingIterator();
+  private LineSegment getSegmentToLeft(Point p) {
+    var descendingIterator = leftLines.descendingIterator();
     while (descendingIterator.hasNext()) {
       var segment = descendingIterator.next();
       if (isLineToTheLeft(p, segment)) {
@@ -167,30 +159,11 @@ public class YMonotoneConverter {
   private static boolean isLineToTheLeft(Point p, LineSegment segment) {
     var higher = segment.getStart();
     var lower = segment.getEnd();
-    if (lower.getY() > higher.getY()) {
+    if (lower.getY() > higher.getY() || (lower.getY() == higher.getY() && lower.getX() > higher.getX())) {
       var temp = higher;
       higher = lower;
       lower = temp;
     }
     return GeometryUtil.orientationTest(lower, higher, p) == GeometryUtil.OrientationResult.RIGHT;
-  }
-
-  private static UpperLower getUpperLowerForRegular(Point p) {
-    var prevNext = GeometryUtil.getPrevNext(p);
-    long prevY = prevNext.prev().getStart().getY();
-    long nextY = prevNext.next().getEnd().getY();
-    if (prevY > nextY) {
-      return new UpperLower(prevNext.prev(), prevNext.next());
-    } else if (prevY < nextY) {
-      return new UpperLower(prevNext.next(), prevNext.prev());
-    }
-    //Both y are equal
-    if (p.isHole()) {
-      return new UpperLower(prevNext.prev(), prevNext.next());
-    }
-    return new UpperLower(prevNext.next(), prevNext.prev());
-  }
-
-  private record UpperLower(LineSegment upper, LineSegment lower) {
   }
 }

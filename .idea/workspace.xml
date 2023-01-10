@@ -4,25 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Code cleanup.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/EarClipConvexConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemOutput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Writer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Trying out ear clipping algorithm.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instances-2IMA15/ccheese4390.instance.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/instances-2IMA15/fpg-poly_0000004900_h2.instance.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/instances-2IMA15/maze_4344_250_001_01.instance.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/instances-2IMA15/srpg_iso_aligned_mc0001336.instance.json" beforeDir="false" afterPath="$PROJECT_DIR$/instances-2IMA15-failing/srpg_iso_aligned_mc0001336.instance.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instances-2IMA15-failing/maze_4344_250_001_01.instance.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/instances-2IMA15-failing/srpg_iso_aligned_mc0001336.instance.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/Checker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/Checker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/BoundarySegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/BoundarySegment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/EarClipConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/EarClipConvexConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/BoundaryPoint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/BoundarySegment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Writer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationEdgeGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/TriangulationUtil.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/ga/util/GeometryTrial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/PrevNext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/PrevNext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/ga/convex/TriangulationUtilTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +103,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15 $PROJECT_DIR$/instances-2IMA15-output" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15 $PROJECT_DIR$/trialOutputs" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ga.*" />
@@ -118,7 +118,7 @@
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="PATTERN" value="com.ga.data.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -134,7 +134,7 @@
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="PATTERN" value="com.ga.data.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -150,7 +150,7 @@
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="PATTERN" value="com.ga.data.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -166,7 +166,7 @@
       <module name="gaProject" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ga.util.*" />
+          <option name="PATTERN" value="com.ga.data.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -310,7 +310,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672582151059</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Trying out ear clipping algorithm.">
+      <created>1673196639241</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1673196639241</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -340,7 +347,8 @@
     <MESSAGE value="Tried bugfixes for segment adder. Still doesn't work." />
     <MESSAGE value="Line segment addition finally works." />
     <MESSAGE value="Code cleanup." />
-    <option name="LAST_COMMIT_MESSAGE" value="Code cleanup." />
+    <MESSAGE value="Trying out ear clipping algorithm." />
+    <option name="LAST_COMMIT_MESSAGE" value="Trying out ear clipping algorithm." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gaProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1671805950127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

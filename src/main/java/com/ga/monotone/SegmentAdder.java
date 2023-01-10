@@ -3,7 +3,7 @@ package com.ga.monotone;
 import com.ga.data.FaceReferenceGenerator;
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
-import com.ga.util.PrevNext;
+import com.ga.data.PrevNext;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -23,24 +23,15 @@ public class SegmentAdder {
     List<LineSegment> distinctSegments = new ArrayList<>();
     for (var segment : segments) {
       if (segment.getFaceReferenceId() == 0) {
-        addFaceReferenceId(segment);
+        FaceReferenceGenerator.assignFaceId(segment);
         distinctSegments.add(segment);
       }
       if (segment.getSibling().getFaceReferenceId() == 0) {
-        addFaceReferenceId(segment.getSibling());
+        FaceReferenceGenerator.assignFaceId(segment.getSibling());
         distinctSegments.add(segment.getSibling());
       }
     }
     return distinctSegments;
-  }
-
-  private static void addFaceReferenceId(LineSegment segment) {
-    var curr = segment;
-    int referenceId = FaceReferenceGenerator.getAndIncrementReferenceId();
-    do {
-      curr.setFaceReferenceId(referenceId);
-      curr = curr.getNext();
-    } while (curr != segment);
   }
 
   public static LineSegment createSegment(PrevNext startSegments, PrevNext endSegments) {

@@ -20,7 +20,7 @@ public class Checker {
       addPoints(startSegment, points);
     }
     if (points.size() != expectedSize) {
-      log.error("Total points covered={} while total points={}", points.size(), expectedSize);
+      log.warn("Total points covered={} while total points={}", points.size(), expectedSize);
     }
     for (var startSegment : startSegments) {
       checkRepeatedPoints(startSegment);
@@ -29,8 +29,8 @@ public class Checker {
     for (var startSegment : startSegments) {
       maxFaceId = Integer.max(maxFaceId, startSegment.getFaceReferenceId());
     }
-    if (maxFaceId != startSegments.size()) {
-      log.info("Max face id is {} but number of segments is {}", maxFaceId, startSegments.size());
+    if (maxFaceId != startSegments.size()+1) {
+      log.warn("Max face id is {} but number of segments is {}", maxFaceId, startSegments.size());
     }
     log.info("Finished checking for instance");
   }
