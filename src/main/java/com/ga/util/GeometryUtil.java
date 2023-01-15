@@ -3,11 +3,14 @@ package com.ga.util;
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
 import com.ga.data.PrevNext;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.geometry.euclidean.twod.Line;
 import org.apache.commons.geometry.euclidean.twod.Lines;
 import org.apache.commons.geometry.euclidean.twod.Vector2D;
 import org.apache.commons.numbers.core.Precision;
+
+import java.util.Comparator;
 
 @Slf4j
 public class GeometryUtil {
@@ -109,6 +112,54 @@ public class GeometryUtil {
 
   public static Vector2D toVector2D(Point p) {
     return Vector2D.of(p.getX(), p.getY());
+  }
+
+  public static Line toLine(LineSegment s) {
+    return Lines.fromPoints(toVector2D(s.getStart()), toVector2D(s.getEnd()), precision);
+  }
+
+  @AllArgsConstructor
+  public static class LineComparator implements Comparator<LineSegment> {
+    private Point p;
+
+    @Override
+    public int compare(LineSegment segment, LineSegment t1) {
+      var segmentLower = segment.getStart();
+      var segmentUpper = segment.getEnd();
+      if (segmentLower.getY() > segmentUpper.getY()
+          || (segmentLower.getY() == segmentUpper.getY() && segmentLower.getX() < segmentUpper.getX())) {
+        var temp = segmentLower;
+        segmentLower = segmentUpper;
+        segmentUpper = temp;
+      }
+      var o1 = orientationTest(segmentLower, segmentUpper, t1.getStart());
+      var o2 = orientationTest(segmentLower, segmentUpper, t1.getEnd());
+      //Both are right or collinear that means t1 is larger (to the right)
+      if (o1 != OrientationResult.LEFT && o2 != OrientationResult.LEFT) {
+        return -1;
+      }
+      if (o1 != OrientationResult.RIGHT && o2 != OrientationResult.RIGHT) {
+        return 1;
+      }
+      segmentLower = t1.getStart();
+      segmentUpper = t1.getEnd();
+      if (segmentLower.getY() > segmentUpper.getY()
+          || (segmentLower.getY() == segmentUpper.getY() && segmentLower.getX() < segmentUpper.getX())) {
+        var temp = segmentLower;
+        segmentLower = segmentUpper;
+        segmentUpper = temp;
+      }
+      o1 = orientationTest(segmentLower, segmentUpper, segment.getStart());
+      o2 = orientationTest(segmentLower, segmentUpper, segment.getEnd());
+      //Both are right or collinear that means t1 is larger (to the right)
+      if (o1 != OrientationResult.LEFT && o2 != OrientationResult.LEFT) {
+        return 1;
+      }
+      if (o1 != OrientationResult.RIGHT && o2 != OrientationResult.RIGHT) {
+        return -1;
+      }
+      throw new IllegalStateException("This shouldn't happen");
+    }
   }
 
   public static PrevNext getPrevNext(Point point) {

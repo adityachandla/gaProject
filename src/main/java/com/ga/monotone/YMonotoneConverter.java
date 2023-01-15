@@ -4,7 +4,9 @@ import com.ga.data.LineSegment;
 import com.ga.data.Point;
 import com.ga.data.Polygon;
 import com.ga.util.GeometryUtil;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.geometry.euclidean.twod.Lines;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,7 +18,7 @@ import java.util.TreeSet;
 @Slf4j
 public class YMonotoneConverter {
 
-  private final TreeSet<LineSegment> leftLines;
+  private final List<LineSegment> leftLines;
   private final Map<LineSegment, Point> helper = new HashMap<>();
   private final List<LineSegment> lineSegmentsToAdd = new ArrayList<>();
   private final List<Point> polygonPoints;
@@ -29,11 +31,14 @@ public class YMonotoneConverter {
     polygon.getPoints().sort(comparator);
 
     polygonPoints = polygon.getPoints();
-    leftLines = new TreeSet<>(Comparator.comparingLong(line -> line.getStart().getX()));
+    leftLines = new ArrayList<>();
   }
 
   public List<LineSegment> getSegmentsToMakeYMonotone() {
     for (var point : polygonPoints) {
+      if (point.equals(new Point(1257,995))) {
+        log.info("Here");
+      }
       switch (GeometryUtil.getPointType(point)) {
         case SPLIT -> handleSplit(point);
         case MERGE -> handleMerge(point);
@@ -146,15 +151,15 @@ public class YMonotoneConverter {
    * @return Line segment that is to the left
    */
   private LineSegment getSegmentToLeft(Point p) {
-    var descendingIterator = leftLines.descendingIterator();
-    while (descendingIterator.hasNext()) {
-      var segment = descendingIterator.next();
-      if (isLineToTheLeft(p, segment)) {
-        return segment;
-      }
+    var minSegment = leftLines.stream()
+        .filter(l -> isLineToTheLeft(p, l))
+        .max(new GeometryUtil.LineComparator(p));
+    if (minSegment.isEmpty()) {
+      throw new IllegalStateException("No lines to the left");
     }
-    throw new IllegalStateException("No line found");
+    return minSegment.get();
   }
+
 
   private static boolean isLineToTheLeft(Point p, LineSegment segment) {
     var higher = segment.getStart();

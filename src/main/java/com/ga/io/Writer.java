@@ -70,9 +70,13 @@ public class Writer {
 
   private static List<Point> getPoints(LineSegment segment) {
     var list = new ArrayList<Point>();
+    assert segment != null;
     var curr = segment;
     do {
       list.add(curr.getStart());
+      if (curr.getNext() == null) {
+        log.info("Curr is {}", curr);
+      }
       curr = curr.getNext();
     } while (curr != segment);
     return list;

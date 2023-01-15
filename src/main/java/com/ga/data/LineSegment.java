@@ -32,9 +32,9 @@ public class LineSegment {
     end.getSegments().add(this);
   }
 
-  public void swapPoints() {
-    var startCopy = this.start;
-    this.start = end;
-    this.end = startCopy;
+  public void removeReferenceFromPoints() {
+    start.getSegments().remove(this);
+    end.getSegments().remove(this);
   }
+
 }
