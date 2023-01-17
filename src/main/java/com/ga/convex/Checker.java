@@ -5,15 +5,15 @@ import com.ga.data.Point;
 import com.ga.data.Polygon;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
 
 
 @Slf4j
 public class Checker {
 
-  public static void checkYMonotone(Polygon initialPolygon, List<LineSegment> startSegments) {
+  public static void checkPolygons(Polygon initialPolygon, List<LineSegment> startSegments) {
     int expectedSize = initialPolygon.getPoints().size();
     Set<Point> points = new HashSet<>();
     for (var startSegment : startSegments) {
@@ -29,7 +29,7 @@ public class Checker {
     for (var startSegment : startSegments) {
       maxFaceId = Integer.max(maxFaceId, startSegment.getFaceReferenceId());
     }
-    if (maxFaceId != startSegments.size()+1) {
+    if (maxFaceId != startSegments.size() + 1) {
       log.warn("Max face id is {} but number of segments is {}", maxFaceId, startSegments.size());
     }
     log.info("Finished checking for instance");

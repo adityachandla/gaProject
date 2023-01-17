@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
  * not be used anywhere in the codebase.
  */
 @UtilityClass
+@Deprecated
 public class Converter {
 
   public static void main(String[] args) throws IOException {

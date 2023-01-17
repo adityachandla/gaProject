@@ -1,7 +1,6 @@
 package com.ga.io;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ga.data.Point;
 import com.ga.data.ProblemInstance;
 import lombok.SneakyThrows;
 
@@ -10,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Reader {
@@ -33,6 +31,7 @@ public class Reader {
 
   /**
    * This method is used to set the boolean flag of holes to true
+   *
    * @param instance Problem Instance
    * @return returns the same instance with correct values of holes
    */

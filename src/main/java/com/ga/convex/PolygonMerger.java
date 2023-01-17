@@ -29,7 +29,7 @@ public class PolygonMerger {
     }
     var uniqueSegments = new ArrayList<LineSegment>();
     var faceReferenceIds = new HashSet<Integer>();
-    for (var segment: addedSegments) {
+    for (var segment : addedSegments) {
       if (!faceReferenceIds.contains(segment.getFaceReferenceId())) {
         faceReferenceIds.add(segment.getFaceReferenceId());
         uniqueSegments.add(segment);
@@ -40,18 +40,22 @@ public class PolygonMerger {
 
   private static LineSegment getRemovableSegment(final List<LineSegment> addedSegments) {
     for (var segment : addedSegments) {
-      if (segment.getSibling() == null) continue;
-      int sizeOfFirst = sizeOfPolygon(segment);
-      int sizeOfSecond = sizeOfPolygon(segment.getSibling());
-      var edgeRemover = new EdgeRemover(segment);
-      var next = segment.getNext();
-      edgeRemover.softDelete();
-      int sizeAfterRemoval = sizeOfPolygon(next);
-      if (GeometryUtil.isConvex(next) && (sizeOfFirst + sizeOfSecond - 2) == sizeAfterRemoval) {
+      var curr = segment;
+      do {
+        if (segment.getSibling() == null) continue;
+        int sizeOfFirst = sizeOfPolygon(segment);
+        int sizeOfSecond = sizeOfPolygon(segment.getSibling());
+        var edgeRemover = new EdgeRemover(segment);
+        var next = segment.getNext();
+        edgeRemover.softDelete();
+        int sizeAfterRemoval = sizeOfPolygon(next);
+        if (GeometryUtil.isConvex(next) && (sizeOfFirst + sizeOfSecond - 2) == sizeAfterRemoval) {
+          edgeRemover.revertSoftDelete();
+          return segment;
+        }
         edgeRemover.revertSoftDelete();
-        return segment;
-      }
-      edgeRemover.revertSoftDelete();
+        curr = curr.getNext();
+      } while (curr != segment);
     }
     return null;
   }
@@ -70,8 +74,8 @@ public class PolygonMerger {
   }
 
   private static class EdgeRemover {
-    private LineSegment segment;
-    private LineSegment sibling;
+    private final LineSegment segment;
+    private final LineSegment sibling;
     private PrevNext segmentPrevNext;
     private PrevNext siblingPrevNext;
 

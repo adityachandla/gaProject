@@ -4,16 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Corrected lines to the left code.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/PolygonMerger.java" afterDir="false" />
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Added segment removal code.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instances-2IMA15-failing/ccheese4390.instance.json" beforeDir="false" afterPath="$PROJECT_DIR$/instances-2IMA15/ccheese4390.instance.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instances-2IMA15-failing/fpg-poly_0000004900_h2.instance.json" beforeDir="false" afterPath="$PROJECT_DIR$/instances-2IMA15/fpg-poly_0000004900_h2.instance.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/Checker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/Checker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/PolygonMerger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/PolygonMerger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Writer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/EarClipConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/EarClipConvexConverter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +99,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15 $PROJECT_DIR$/trialOutputs" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15/ccheese4390.instance.json $PROJECT_DIR$/trialOutputs" />
       <option name="VM_PARAMETERS" value="-ea" />
       <extension name="coverage">
         <pattern>
@@ -323,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673792162667</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Added segment removal code.">
+      <created>1673973675318</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1673973675318</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -356,7 +368,8 @@
     <MESSAGE value="Trying out ear clipping algorithm." />
     <MESSAGE value="Cleanup" />
     <MESSAGE value="Corrected lines to the left code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected lines to the left code." />
+    <MESSAGE value="Added segment removal code." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added segment removal code." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gaProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1671805950127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

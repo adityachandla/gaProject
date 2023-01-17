@@ -18,7 +18,7 @@ public class FaceReferenceGenerator {
   }
 
   public static void assignFaceIds(List<LineSegment> segments) {
-    for (var segment: segments) {
+    for (var segment : segments) {
       assignFaceId(segment);
     }
   }
@@ -29,6 +29,6 @@ public class FaceReferenceGenerator {
     do {
       curr.setFaceReferenceId(referenceId);
       curr = curr.getNext();
-    } while(curr != segment);
+    } while (curr != segment);
   }
 }

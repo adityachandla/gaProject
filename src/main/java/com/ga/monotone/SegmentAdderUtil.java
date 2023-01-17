@@ -2,8 +2,8 @@ package com.ga.monotone;
 
 import com.ga.data.LineSegment;
 import com.ga.data.Point;
-import com.ga.util.GeometryUtil;
 import com.ga.data.PrevNext;
+import com.ga.util.GeometryUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.geometry.euclidean.twod.Line;
 import org.apache.commons.geometry.euclidean.twod.Lines;
@@ -22,7 +22,7 @@ public class SegmentAdderUtil {
    * in counterClockwise direction and the lineForNext in the clockwise
    * direction.
    *
-   * @param dest The point to which we need to create the line
+   * @param dest   The point to which we need to create the line
    * @param viewer The point from which we need to create the line
    * @return The PrevNext pair that should be considered for @dest
    */
@@ -46,14 +46,15 @@ public class SegmentAdderUtil {
 
   /**
    * By how many radians do we need to rotate one CCW to get to two.
+   *
    * @param one viewing line
    * @param two one of the next lines
    * @return radians
    */
   private static double getAngleCounterClockwise(Line one, Line two) {
     var angle = one.angle(two);
-    if(angle < 0) {
-      angle += (2*Math.PI);
+    if (angle < 0) {
+      angle += (2 * Math.PI);
     }
     return angle;
   }
@@ -61,7 +62,7 @@ public class SegmentAdderUtil {
   private static double getAngleClockwise(Line one, Line two) {
     var angle = one.angle(two);
     if (angle > 0) {
-      angle -= (2*Math.PI);
+      angle -= (2 * Math.PI);
     }
     return Math.abs(angle);
   }

@@ -4,16 +4,13 @@ import com.ga.data.LineSegment;
 import com.ga.data.Point;
 import com.ga.data.Polygon;
 import com.ga.util.GeometryUtil;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.geometry.euclidean.twod.Lines;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 
 @Slf4j
 public class YMonotoneConverter {

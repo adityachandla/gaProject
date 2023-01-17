@@ -23,7 +23,7 @@ public class EarClipConvexConverter {
     addAllPoints(start);
     curr = start;
     prev = start.getPrev();
-    while(!GeometryUtil.isConvex(curr)) {
+    while (!GeometryUtil.isConvex(curr)) {
       //While not convex, keep finding and clipping ears
       if (!clipEar()) {
         log.info("Curr is {} with face id {}", curr, curr.getFaceReferenceId());
@@ -85,9 +85,9 @@ public class EarClipConvexConverter {
         continue;
       }
       //point should be left or collinear wrt all segments of the triangle
-      var r1 = GeometryUtil.orientationTest(p1,p2, point) == GeometryUtil.OrientationResult.RIGHT;
-      var r2 = GeometryUtil.orientationTest(p2,p3, point) == GeometryUtil.OrientationResult.RIGHT;
-      var r3 = GeometryUtil.orientationTest(p3,p1, point) == GeometryUtil.OrientationResult.RIGHT;
+      var r1 = GeometryUtil.orientationTest(p1, p2, point) == GeometryUtil.OrientationResult.RIGHT;
+      var r2 = GeometryUtil.orientationTest(p2, p3, point) == GeometryUtil.OrientationResult.RIGHT;
+      var r3 = GeometryUtil.orientationTest(p3, p1, point) == GeometryUtil.OrientationResult.RIGHT;
       if (!r1 && !r2 && !r3) {
         return true;
       }

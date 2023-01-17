@@ -6,4 +6,5 @@ public record ProblemOutput(
     String type,
     String instance,
     List<List<Point>> polygons
-) {}
+) {
+}
