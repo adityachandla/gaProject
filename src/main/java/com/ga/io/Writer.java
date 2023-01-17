@@ -46,6 +46,7 @@ public class Writer {
     var hs = new HashSet<Point>();
     for (var p :points) {
       if(hs.contains(p)) {
+        log.info("Has duplicate points");
         return false;
       }
       hs.add(p);
@@ -63,7 +64,7 @@ public class Writer {
     var last = points.get(points.size()-1);
     var first = points.get(0);
     area += (last.getY() + first.getY())*(last.getX()-first.getX());
-    if (area < 0) 
+    if (area < 0)
       log.info("Got area {}", area);
     return area > 0;
   }
@@ -75,7 +76,7 @@ public class Writer {
     do {
       list.add(curr.getStart());
       if (curr.getNext() == null) {
-        log.info("Curr is {}", curr);
+        log.error("Curr is {}", curr);
       }
       curr = curr.getNext();
     } while (curr != segment);

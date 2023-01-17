@@ -36,9 +36,6 @@ public class YMonotoneConverter {
 
   public List<LineSegment> getSegmentsToMakeYMonotone() {
     for (var point : polygonPoints) {
-      if (point.equals(new Point(1257,995))) {
-        log.info("Here");
-      }
       switch (GeometryUtil.getPointType(point)) {
         case SPLIT -> handleSplit(point);
         case MERGE -> handleMerge(point);

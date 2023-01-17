@@ -37,6 +37,9 @@ public class Checker {
 
   private static void addPoints(LineSegment start, Set<Point> points) {
     var curr = start;
+    if (curr.getNext() == null) {
+      log.error("Curr has no next {}", curr);
+    }
     points.add(curr.getStart());
     do {
       points.add(curr.getEnd());

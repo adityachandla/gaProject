@@ -20,6 +20,7 @@ public class LineSegment {
   @ToString.Exclude
   private LineSegment sibling;
 
+  @EqualsAndHashCode.Exclude
   private int faceReferenceId;
 
   public LineSegment(Point start, Point end) {

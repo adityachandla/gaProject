@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Cleanup">
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Corrected lines to the left code.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/PolygonMerger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instances-2IMA15-failing/ccheese4390.instance.json" beforeDir="false" afterPath="$PROJECT_DIR$/instances-2IMA15/ccheese4390.instance.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instances-2IMA15-failing/fpg-poly_0000004900_h2.instance.json" beforeDir="false" afterPath="$PROJECT_DIR$/instances-2IMA15/fpg-poly_0000004900_h2.instance.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/Checker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/Checker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/LineSegment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Writer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,8 +59,8 @@
       <recent name="com.ga.data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/instances-2IMA15-failing" />
       <recent name="$PROJECT_DIR$/instances-2IMA15" />
+      <recent name="$PROJECT_DIR$/instances-2IMA15-failing" />
       <recent name="$PROJECT_DIR$/customInstances" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
@@ -91,7 +94,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15-failing/ $PROJECT_DIR$/trialOutputs" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15 $PROJECT_DIR$/trialOutputs" />
       <option name="VM_PARAMETERS" value="-ea" />
       <extension name="coverage">
         <pattern>
@@ -313,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673379763195</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Corrected lines to the left code.">
+      <created>1673792162667</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1673792162667</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -345,18 +355,8 @@
     <MESSAGE value="Code cleanup." />
     <MESSAGE value="Trying out ear clipping algorithm." />
     <MESSAGE value="Cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleanup" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Corrected lines to the left code." />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected lines to the left code." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gaProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1671805950127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
