@@ -114,13 +114,8 @@ public class GeometryUtil {
     return Vector2D.of(p.getX(), p.getY());
   }
 
-  public static Line toLine(LineSegment s) {
-    return Lines.fromPoints(toVector2D(s.getStart()), toVector2D(s.getEnd()), precision);
-  }
-
   @AllArgsConstructor
   public static class LineComparator implements Comparator<LineSegment> {
-    private Point p;
 
     @Override
     public int compare(LineSegment segment, LineSegment t1) {

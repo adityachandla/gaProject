@@ -4,21 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Added segment removal code.">
+    <list default="true" id="f16d5466-2f47-4b53-b124-48d025005088" name="Changes" comment="Cleanup">
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/PolygonConversionUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runner.sh" beforeDir="false" afterPath="$PROJECT_DIR$/runner.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/Checker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/Checker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/ConvexConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/convex/PolygonMerger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/convex/PolygonMerger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/FaceReferenceGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/data/ProblemOutput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Reader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/io/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/io/Writer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/SegmentAdderUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/monotone/YMonotoneConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/EarClipConvexConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/triangulation/EarClipConvexConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ga/util/GeometryUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,16 +46,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.gutterIcons&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "/home/aditya/Downloads/TUE/GA/gaProject",
+    "settings.editor.selected.configurable": "editor.preferences.gutterIcons"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.ga.data" />
@@ -99,7 +97,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ga.Main" />
       <module name="gaProject" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15/ccheese4390.instance.json $PROJECT_DIR$/trialOutputs" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/instances-2IMA15/ $PROJECT_DIR$/instances-2IMA15-output/" />
       <option name="VM_PARAMETERS" value="-ea" />
       <extension name="coverage">
         <pattern>
@@ -335,7 +333,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673973675318</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Cleanup">
+      <created>1673983233002</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1673983233002</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -366,10 +371,10 @@
     <MESSAGE value="Line segment addition finally works." />
     <MESSAGE value="Code cleanup." />
     <MESSAGE value="Trying out ear clipping algorithm." />
-    <MESSAGE value="Cleanup" />
     <MESSAGE value="Corrected lines to the left code." />
     <MESSAGE value="Added segment removal code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added segment removal code." />
+    <MESSAGE value="Cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleanup" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gaProject$Main.ic" NAME="Main Coverage Results" MODIFIED="1671805950127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -1,3 +1,3 @@
 mvn compile
-## Change the last part to the directory where you have your instances
-mvn exec:java -Dexec.mainClass=com.ga.Main -Dexec.args=`pwd`/instances-2IMA15
+# First argument is the source directory and the second argument is the output directory
+mvn exec:java -Dexec.mainClass=com.ga.Main -Dexec.args="`pwd`/instances-2IMA15 `pwd`/instances-2IMA15-output/"

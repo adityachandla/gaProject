@@ -29,9 +29,7 @@ public class Checker {
     for (var startSegment : startSegments) {
       maxFaceId = Integer.max(maxFaceId, startSegment.getFaceReferenceId());
     }
-    if (maxFaceId != startSegments.size() + 1) {
-      log.warn("Max face id is {} but number of segments is {}", maxFaceId, startSegments.size());
-    }
+    log.info("Max face id is {} and number of segments is {}", maxFaceId, startSegments.size());
     log.info("Finished checking for instance");
   }
 

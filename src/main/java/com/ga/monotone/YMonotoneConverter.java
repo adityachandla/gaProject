@@ -15,7 +15,7 @@ import java.util.Map;
 @Slf4j
 public class YMonotoneConverter {
 
-  private final List<LineSegment> leftLines;
+  private final List<LineSegment> leftLines = new ArrayList<>();
   private final Map<LineSegment, Point> helper = new HashMap<>();
   private final List<LineSegment> lineSegmentsToAdd = new ArrayList<>();
   private final List<Point> polygonPoints;
@@ -28,7 +28,6 @@ public class YMonotoneConverter {
     polygon.getPoints().sort(comparator);
 
     polygonPoints = polygon.getPoints();
-    leftLines = new ArrayList<>();
   }
 
   public List<LineSegment> getSegmentsToMakeYMonotone() {
@@ -147,7 +146,7 @@ public class YMonotoneConverter {
   private LineSegment getSegmentToLeft(Point p) {
     var minSegment = leftLines.stream()
         .filter(l -> isLineToTheLeft(p, l))
-        .max(new GeometryUtil.LineComparator(p));
+        .max(new GeometryUtil.LineComparator());
     if (minSegment.isEmpty()) {
       throw new IllegalStateException("No lines to the left");
     }

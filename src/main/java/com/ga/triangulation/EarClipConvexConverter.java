@@ -24,11 +24,7 @@ public class EarClipConvexConverter {
     curr = start;
     prev = start.getPrev();
     while (!GeometryUtil.isConvex(curr)) {
-      //While not convex, keep finding and clipping ears
-      if (!clipEar()) {
-        log.info("Curr is {} with face id {}", curr, curr.getFaceReferenceId());
-        break;
-      }
+      clipEar();
     }
     createdSegments.add(curr);
     if (createdSegments.size() > 1) {
